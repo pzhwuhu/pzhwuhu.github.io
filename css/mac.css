@@ -12,6 +12,7 @@ figure.highlight {
 }
 [data-user-color-scheme='dark'] figure.highlight {
   background: #000;
+  box-shadow: 0 5px 10px #2a5763;
 }
 /* 该伪元素用于展示代码语言,若不需要可删除 */
 figure.highlight::before {
