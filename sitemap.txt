@@ -5,8 +5,8 @@ http://pzhwuhu.github.io/css/scroll_animation.css
 http://pzhwuhu.github.io/2024/10/05/My-fist-blog/
 http://pzhwuhu.github.io/about/index.html
 http://pzhwuhu.github.io/
-http://pzhwuhu.github.io/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/
 http://pzhwuhu.github.io/tags/CO/
 http://pzhwuhu.github.io/tags/Verilog/
-http://pzhwuhu.github.io/categories/%E6%97%A5%E5%B8%B8/
+http://pzhwuhu.github.io/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/
 http://pzhwuhu.github.io/categories/CO/
+http://pzhwuhu.github.io/categories/%E6%97%A5%E5%B8%B8/

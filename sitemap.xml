@@ -65,13 +65,6 @@
 
   
   <url>
-    <loc>http://pzhwuhu.github.io/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
-    <lastmod>2024-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://pzhwuhu.github.io/tags/CO/</loc>
     <lastmod>2024-10-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -85,17 +78,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://pzhwuhu.github.io/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
+    <lastmod>2024-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
-    <loc>http://pzhwuhu.github.io/categories/%E6%97%A5%E5%B8%B8/</loc>
+    <loc>http://pzhwuhu.github.io/categories/CO/</loc>
     <lastmod>2024-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/categories/CO/</loc>
+    <loc>http://pzhwuhu.github.io/categories/%E6%97%A5%E5%B8%B8/</loc>
     <lastmod>2024-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
