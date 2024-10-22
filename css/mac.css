@@ -11,7 +11,7 @@ figure.highlight {
   box-shadow: 0 5px 10px #a1a1a1;
 }
 [data-user-color-scheme='dark'] figure.highlight {
-  background: #000;
+  background: rgba(0,0,0,0.161);
   box-shadow: 0 5px 10px #2a5763;
 }
 /* 该伪元素用于展示代码语言,若不需要可删除 */
@@ -38,14 +38,14 @@ figure.highlight::after {
   left: 12px;
 }
 .hljs {
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(13,14,13,0);
 }
 /* 代码块颜色 */
 figure.highlight tr {
-  background-color: #f9fffa;
+  background-color: rgba(33,155,88,0.549);
 }
 [data-user-color-scheme='dark'] .markdown-body table tr {
-  background-color: #25272d;
+  background-color: rgba(42,181,27,0.647);
 }
 figure.highlight>table {
   border-radius: 0 0 5px 5px;
@@ -54,5 +54,5 @@ figure.highlight>table {
   background-color: #f9fffa;
 }
 [data-user-color-scheme='dark'] .gutter {
-  background-color: #25272d;
+  background-color: #1c202d;
 }
