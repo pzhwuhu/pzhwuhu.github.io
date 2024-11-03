@@ -4,11 +4,42 @@
   
   
   <entry>
+    <title>P3课上</title>
+    <link href="/2024/11/01/P3%E8%AF%BE%E4%B8%8A/"/>
+    <url>/2024/11/01/P3%E8%AF%BE%E4%B8%8A/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-info">            <p>通过阅读本文，你可以大致了解BUAA 2024秋季 P3课上测试的相关内容<br>题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异</p>          </div><h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>唉唉，P3就挂了，当头一棒啊 <span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span> ＞﹏＜</p><p>刚过P4课下，想着写一篇博客来记录下挂P3的感受以及一些血与泪的经验教训，希望<code>generations to come</code> 不要重蹈覆辙呀 <span class="github-emoji" alias="sweat_smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f605.png?v8">&#x1f605;</span></p><p>不过确实P3课上有一定的压力，最后延长了半小时，不过本人倒是一题没过，菜到家了😭，想看课上心路历程（第一视角破防）的直接跳转后面即可</p><h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="CWP"><a href="#CWP" class="headerlink" title="CWP"></a>CWP</h2><p>指令格式为CWP rs, rt, Imm_16</p><p>大致是说要将<code>Imm_16</code>符号扩展后左移两位与当前PC值进行比较，如果<code>Imm_16</code>大于PC，则将<strong>原来的</strong><code>Imm_16</code>存到rs,否则存到rt（也可能反过来，不太记得了）</p><p>让我们来思考本题中哪些地方需要更改，首先是ALU模块的第一个输入inA前加一个多路选择器，要把PC作为输入，同时GRF模块的写入地址和写入数据均需要加一个多路选择器。因为之前课下的指令均不涉及对rs寄存器的写入，所以写入地址前得加。整体思路没什么困难，但是如果你之前没有预留接口，以及Logiism电路很紧凑的话，你可能会改的比较吃力，别问我怎么知道的 QAQ</p><p>至于判断条件的话，可以在ALU里实现并且沿用之前beq的zero端口，当然对于本指令，需要在Controller模块新加一个输出信号。</p><h2 id="BGC"><a href="#BGC" class="headerlink" title="BGC"></a>BGC</h2><p>指令格式为BGC rs, rt, Imm_16</p><p>大致是说将GR[rs]和GRF[rt] 32位的每两位转换为对应的格雷码，并比较二者转换后的32位数中 1 的个数，如果一个大于另一个，则按照<code>offset_16</code>跳转</p><p>格雷码转换：00-0001-0110-1111-10</p><p>如果没什么思路可以设计一个2bit的格雷码转换程序，再暴力解决，最后别忘了<code>bit adder</code>这个元件，可以直接统计其中1的个数</p><p>当然，可以发现，格雷码转换其实就是：<strong>逻辑右移一位再与原数异或</strong>，其实直接真值表打表也挺容易</p><p>复用beq的跳转即可，<strong>注意对跳转信号的判断</strong></p><h2 id="LWSO"><a href="#LWSO" class="headerlink" title="LWSO"></a>LWSO</h2><p>比较复杂，我课上没想，，请移步其他大佬的博客 (❁´◡&#96;❁)</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>针对我课上出的问题以及课下来发现的问题及反思，总结了几点供后来的学弟学妹借鉴，希望你们不要重蹈覆辙了<span class="github-emoji" alias="sunglasses" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png?v8">&#x1f60e;</span></p><ul><li>课下充分测试，与同学对拍，保证不留bug</li><li>预留接口给新的指令和新的信号，比如直接添加一个New信号在课下的Controller里面，但先不连接</li><li>模块间，端口处，留出适当的距离，不要像我一样加MUX时手忙脚乱，一个反面例子如下：<img src="/../img_post/p3_1.png"></li><li><strong>课程组要求输出的那些个信号对应的Tunnel，一定要检查是否是最终的正确信号，</strong>不要在Tunnel和端口间更改信号，这样会导致本地运行正确但输出错误，很难debug,因为课程组为了评测，会让你把相关信号输出出去，像这样：<img src="/../img_post/p3_2.png"></li><li>如果你像上面说的那样做了，会出问题，<strong>具体情况</strong>见我的心路历程-第二天部分debug发现的毛病，后来发现不少同学都有这个问题，希望后来人能够引以为戒，这都是学长学姐亲自踩的坑啊 ε&#x3D;(´ο｀*)))唉<br><strong>反面教材</strong>如下：<img src="/../img_post/p3_0.png"><br><strong>最后，如果你对我出的bug感兴趣并且想知道我课上有多难受的话，请接着往下看</strong></li></ul><h1 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h1><h2 id="课上"><a href="#课上" class="headerlink" title="课上"></a>课上</h2><p>你能知道我T1调了半天，本地各种测试各种没问题，加上去死活不对的感受嘛<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span>麻烦的是，评测机并不会在出错的地方立马报错，而是会在后面几条指令的某一条报错，而我的则是一条lw指令。当时翻译出来人都蒙了，我课下测试了那么多数据，怎么能有问题呢？而且我裸交一发对了2个点，没问题呀，于是我返回去检查课上的通路，一通测试下来，找不出任何问题，各种数据都测完了，我已经筋疲力竭了，此时已快到8点，而我第一题还没过，，看看周围的同学，我知道，这次有点悬；于是我检查课下去了，检查一番又检查测试课上，在这样的反复中迷失了自我，又过了15min，这下我彻底慌神了，本地测试没有问题啊，交上去就是不对，能有什么办法呢？不知道有没有人能感受到我的绝望≡(▔﹏▔)≡</p><p>于是，我诚惶诚恐地打开了第二题，一看感觉直接将32位每两位转换为格雷码，好麻烦，也不想新建模块，于是开始冥思苦想，试图打开什么新思路，期间还瞄了一眼第三题，感觉很复杂，一看就不想做。</p><p>终于到了8点半，一事无成的我决定开始摆烂，思考人生，我趴在桌上，脑子想的什么呢？<span class="github-emoji" alias="thinking" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png?v8">&#x1f914;</span>是从Pre以来的披荆斩棘吗？是P3课下测试对拍的欢乐吗？是校庆时在摊位上玩游戏的激情吗？还是来6系充实繁忙的每一天呢？我不知道，我的脑子一片空白。期间还看到zlr助教gg看了一眼我，又看了一眼平板，不知道他又对我有何感想呢？</p><p>时间很快来到了8.58，我一看，大部分人跟我一样，被硬控在了新北地下的机房里，只有少数寥寥的几个座位是空的，说实话，我的心里竟然感到一丝慰藉，还有这么多人也没过啊（buhsi)</p><p>但是，考试延迟了半小时，期间有一部分人做出来了走了，也有一些人像我一样留到了最后，九点半走出机房，看到同行的人也是垂头丧气，大家心里都很不是滋味<span class="github-emoji" alias="upside_down_face" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f643.png?v8">&#x1f643;</span></p><h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><p>回到寝室后，我望着课下的电路，脑子里一片茫然，一种无力感裹挟着我，让我说不出话来，期间看了紫玉哥哥的题解，也看了水群里大伙的讨论，还找亲爱的助教zjygg倾诉了一番，但心里依旧难过。</p><p>上床后，很快睡着了，第二天物理课，我和vach（室友）坐在一起，谈论着P3，才发现他也没过，偷笑</p><p><span class="github-emoji" alias="nerd_face" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f913.png?v8">&#x1f913;</span> ,我打开P3课下，准备重构一番，毕竟课上加通路加的难受，就在我给GRF的写入地址加一个标签的时候，我<strong>猛地意识到了自己的课上bug</strong>，见下图</p><p><img src="/../img_post/p3_0.png"></p><p>我课上是直接把多路选择器加在了红色位置，但是我的<strong>寄存器写入地址的<code>Tunnel</code>还是接在了原来的蓝色位置</strong>，也就导致了输出地址的问题。更恐怖的是，我课上debug是直接接了probe在GRF的WA前面，完全没有管Reg_Addr的输出问题，这也是我本地测试毫无问题，交上去报错奇奇怪怪的原因，哎<span class="github-emoji" alias="scream" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f631.png?v8">&#x1f631;</span></p><p>到这里，我真想穿越回去课上改掉这个bug,但时间无法倒流，哎。那个时刻，我真正知道了什么叫<strong>欲哭无泪</strong></p><p>中午去给空天杯篮球赛当志愿者，记分员，沉浸在了比赛里，忘掉了昨晚的悲痛，也感谢这个志愿活动，让我成功走了出来，<strong>忘掉烦恼，笑对生活</strong><span class="github-emoji" alias="smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">&#x1f604;</span></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CO</category>
+      
+      <category>实验</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CO</tag>
+      
+      <tag>Logisim</tag>
+      
+      <tag>CPU</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>P2课上</title>
     <link href="/2024/10/22/P2%E8%AF%BE%E4%B8%8A/"/>
     <url>/2024/10/22/P2%E8%AF%BE%E4%B8%8A/</url>
     
-    <content type="html"><![CDATA[<div class="note note-info">            <p>通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容<br>本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。<br>题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异</p>          </div><h1>P2_Q1（Mooncake)</h1><h2 id="大意">大意</h2><p>中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼后，每人拿一个，直到剩下的数量 &lt; N，并将剩下的月饼还回去。要实现每个人拿到尽可能多的月饼，并减少还回去的负担，请你计算拿多少个月饼 （用K表示）合适，输出每个人<strong>拿完剩下的</strong>月饼数。</p><h2 id="思路">思路</h2><p>纯数学题，读懂题意后，直接用 R / N，再将结果乘 N ，结果用 x 表示，那么此时 x 就是保证每个人拿到尽可能多的月饼的总月饼数，例如：n = 10, R = 36，则x=30。此时便得到了理想情况下拿的月饼数K，但是有一个最小值 L 限制，并注意要输出同学们拿剩下的月饼数，而不是K，故直接输出 x &lt; L ? L-x : 0。然后翻译。</p><h1>P2_Q2</h1><h2 id="大意-2">大意</h2><p>利用欧拉筛判断一个输入的数n是否为质数。大佬们说代码给的是欧式筛，我不太懂（逃）<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">😭</span></p><h2 id="思路-2">思路</h2><p>没有思路，对着C代码翻译即可，也没有函数，无需维护变量，细心点，问题不大<span class="github-emoji" alias="smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">😄</span></p><h1>P3_Q3</h1><h2 id="大意-3">大意</h2><p>这道题题面很长，有点麻烦，我没看，既然给了C代码，<s>直接肉编就好了</s> 😁</p><p>听别人说是输出在一个有向图中从给定出发点出发可到达的出度为0的点的个数，假如出发点出度为0则直接输出0</p><h2 id="思路-3">思路</h2><p>直接对着肉编，然后可以<strong>封装</strong>几个常用的函数为宏，比如<code>getInt</code> <code>putInt</code> <code>getIndex</code> <code>exit</code> ……（这几个宏很常用，<s>甚至可以开考前敲上去</s>）使用起来更加方便，也利于整体代码的美观与调试，值得一提的是，<strong>尽量避免在宏中使用寄存器</strong>，以此来避免可能的麻烦，除非迫不得已（如$a0, $v0等）,如果使用了寄存器，需<strong>注意上下文</strong>有无对寄存器值的维护或者压根这个寄存器就是随手用随手赋值的（这样并不被提倡）。</p><p>对于本题，每次递归前后，维护好 <code>$ra</code> 寄存器以及<code>u</code> <code>i</code> 的值即可，建议编写、调用宏<code>push</code> <code>pop</code></p><h1>结语</h1><p>值得一提的是，本次Q3来自我们亲爱的助教 zygg ，上次上机后我还问过他谁出题这个事来着（<s>未经</s>）<span class="github-emoji" alias="laughing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">😆</span>,他跟我说你下次上机就能初见端倪了。</p><p>P2之后就是P3——单周期CPU的logisim实现了，加油！</p>]]></content>
+    <content type="html"><![CDATA[<div class="note note-info">            <p>通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容<br>本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。<br>题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异</p>          </div><h1 id="P2-Q1（Mooncake"><a href="#P2-Q1（Mooncake" class="headerlink" title="P2_Q1（Mooncake)"></a>P2_Q1（Mooncake)</h1><h2 id="大意"><a href="#大意" class="headerlink" title="大意"></a>大意</h2><p>中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼后，每人拿一个，直到剩下的数量 &lt; N，并将剩下的月饼还回去。要实现每个人拿到尽可能多的月饼，并减少还回去的负担，请你计算拿多少个月饼 （用K表示）合适，输出每个人<strong>拿完剩下的</strong>月饼数。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>纯数学题，读懂题意后，直接用 R &#x2F; N，再将结果乘 N ，结果用 x 表示，那么此时 x 就是保证每个人拿到尽可能多的月饼的总月饼数，例如：n &#x3D; 10, R &#x3D; 36，则x&#x3D;30。此时便得到了理想情况下拿的月饼数K，但是有一个最小值 L 限制，并注意要输出同学们拿剩下的月饼数，而不是K，故直接输出 x &lt; L ? L-x : 0。然后翻译。</p><h1 id="P2-Q2"><a href="#P2-Q2" class="headerlink" title="P2_Q2"></a>P2_Q2</h1><h2 id="大意-1"><a href="#大意-1" class="headerlink" title="大意"></a>大意</h2><p>利用欧拉筛判断一个输入的数n是否为质数。大佬们说代码给的是欧式筛，我不太懂（逃）<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span></p><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>没有思路，对着C代码翻译即可，也没有函数，无需维护变量，细心点，问题不大<span class="github-emoji" alias="smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">&#x1f604;</span></p><h1 id="P3-Q3"><a href="#P3-Q3" class="headerlink" title="P3_Q3"></a>P3_Q3</h1><h2 id="大意-2"><a href="#大意-2" class="headerlink" title="大意"></a>大意</h2><p>这道题题面很长，有点麻烦，我没看，既然给了C代码，<del>直接肉编就好了</del> 😁</p><p>听别人说是输出在一个有向图中从给定出发点出发可到达的出度为0的点的个数，假如出发点出度为0则直接输出0</p><h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>直接对着肉编，然后可以<strong>封装</strong>几个常用的函数为宏，比如<code>getInt</code> <code>putInt</code> <code>getIndex</code> <code>exit</code> ……（这几个宏很常用，<del>甚至可以开考前敲上去</del>）使用起来更加方便，也利于整体代码的美观与调试，值得一提的是，<strong>尽量避免在宏中使用寄存器</strong>，以此来避免可能的麻烦，除非迫不得已（如$a0, $v0等）,如果使用了寄存器，需<strong>注意上下文</strong>有无对寄存器值的维护或者压根这个寄存器就是随手用随手赋值的（这样并不被提倡）。</p><p>对于本题，每次递归前后，维护好 <code>$ra</code> 寄存器以及<code>u</code> <code>i</code> 的值即可，建议编写、调用宏<code>push</code> <code>pop</code></p><h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>值得一提的是，本次Q3来自我们亲爱的助教 zygg ，上次上机后我还问过他谁出题这个事来着（<del>未经</del>）<span class="github-emoji" alias="laughing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">&#x1f606;</span>,他跟我说你下次上机就能初见端倪了。</p><p>P2之后就是P3——单周期CPU的logisim实现了，加油！</p>]]></content>
     
     
     <categories>
@@ -71,6 +102,8 @@
       
       <category>CO</category>
       
+      <category>实验</category>
+      
     </categories>
     
     
@@ -91,12 +124,12 @@
     <link href="/2024/10/05/My-fist-blog/"/>
     <url>/2024/10/05/My-fist-blog/</url>
     
-    <content type="html"><![CDATA[<h1>过程</h1><p>经过了大概一天的努力，<strong>个人博客终于搭建好了！</strong><s>虽然很简陋（后续会不断完善）</s> 采用的是hexo架构和fluid主题<br>这一天下来，也不容易啊，走了不少弯路，踩了很多坑，不断地上网查阅资料，也有很多自己摸索的地方，磕磕绊绊的过程中也有不少收获。</p><h1>感想</h1><h2 id="还好有个国庆假让我有时间花一整天搭建博客-（其实是暑假纯玩去了）">还好有个国庆假让我有时间花一整天搭建博客~~（其实是暑假纯玩去了）~~</h2><h2 id="接下来还需要学习的地方">接下来还需要学习的地方</h2><ul><li>了解git的用法</li><li>尝试将fluid主题的代码块修改为Mac风格<s>纯粹是为了装</s></li><li>写物理笔记并上传博客</li><li>写P1课下并写一篇心得</li></ul><h1>鸣谢</h1><ol><li><a href="https://hexo.fluid-dev.com/docs/start/">Fluid主题官方介绍文档</a> 全中文文档</li><li><a href="https://zhuanlan.zhihu.com/p/371995929">知乎大神的博客搭建指南</a> 手把手教学</li><li>各位学长学姐，正是看了你们的博客，才想建一个自己的，motivation了算是</li></ol>]]></content>
+    <content type="html"><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p>经过了大概一天的努力，<strong>个人博客终于搭建好了！</strong><del>虽然很简陋（后续会不断完善）</del> 采用的是hexo架构和fluid主题<br>这一天下来，也不容易啊，走了不少弯路，踩了很多坑，不断地上网查阅资料，也有很多自己摸索的地方，磕磕绊绊的过程中也有不少收获。</p><h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><h2 id="还好有个国庆假让我有时间花一整天搭建博客（其实是暑假纯玩去了）"><a href="#还好有个国庆假让我有时间花一整天搭建博客（其实是暑假纯玩去了）" class="headerlink" title="还好有个国庆假让我有时间花一整天搭建博客（其实是暑假纯玩去了）"></a>还好有个国庆假让我有时间花一整天搭建博客<del>（其实是暑假纯玩去了）</del></h2><h2 id="接下来还需要学习的地方"><a href="#接下来还需要学习的地方" class="headerlink" title="接下来还需要学习的地方"></a>接下来还需要学习的地方</h2><ul><li>了解git的用法</li><li>尝试将fluid主题的代码块修改为Mac风格<del>纯粹是为了装</del></li><li>写物理笔记并上传博客</li><li>写P1课下并写一篇心得</li></ul><h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ol><li><a href="https://hexo.fluid-dev.com/docs/start/">Fluid主题官方介绍文档</a> 全中文文档</li><li><a href="https://zhuanlan.zhihu.com/p/371995929">知乎大神的博客搭建指南</a> 手把手教学</li><li>各位学长学姐，正是看了你们的博客，才想建一个自己的，motivation了算是</li></ol>]]></content>
     
     
     <categories>
       
-      <category>-日常</category>
+      <category>日常</category>
       
     </categories>
     
