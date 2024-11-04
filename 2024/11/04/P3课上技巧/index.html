@@ -19,25 +19,30 @@
   <meta name="author" content="pzhwuhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异             P2_Q1（Mooncake)大意中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼">
+    <meta name="description" content="通过阅读本文，你可以大致了解BUAA 2024秋季 P3课上添加指令的常见坑点和小技巧             写在前面做了两次P3，这次较为顺利，40min就整完了，从上周挂掉P3到现在，本人发现了不少大家共性的问题或者叫易错点，也有一些个人的经验与技巧，写在这里，希望下一届 的朋友们能够更加顺利地通过P3😁😁(●’◡’●) 本人课下重构版如下： 正文易错点总结其实">
 <meta property="og:type" content="article">
-<meta property="og:title" content="P2课上">
-<meta property="og:url" content="http://pzhwuhu.github.io/2024/10/22/P2%E8%AF%BE%E4%B8%8A/index.html">
+<meta property="og:title" content="P3课上技巧">
+<meta property="og:url" content="http://pzhwuhu.github.io/2024/11/04/P3%E8%AF%BE%E4%B8%8A%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="鹏哥">
-<meta property="og:description" content="通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异             P2_Q1（Mooncake)大意中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼">
+<meta property="og:description" content="通过阅读本文，你可以大致了解BUAA 2024秋季 P3课上添加指令的常见坑点和小技巧             写在前面做了两次P3，这次较为顺利，40min就整完了，从上周挂掉P3到现在，本人发现了不少大家共性的问题或者叫易错点，也有一些个人的经验与技巧，写在这里，希望下一届 的朋友们能够更加顺利地通过P3😁😁(●’◡’●) 本人课下重构版如下： 正文易错点总结其实">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://pzhwuhu.github.io/img/%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%9F%8E2.png">
-<meta property="article:published_time" content="2024-10-21T16:48:13.000Z">
-<meta property="article:modified_time" content="2024-10-22T17:58:10.697Z">
+<meta property="og:image" content="http://pzhwuhu.github.io/img_post/p3_4.png">
+<meta property="og:image" content="http://pzhwuhu.github.io/img_post/p3_0.png">
+<meta property="og:image" content="http://pzhwuhu.github.io/img_post/p3_6.png">
+<meta property="og:image" content="http://pzhwuhu.github.io/img_post/p3_5.png">
+<meta property="og:image" content="http://pzhwuhu.github.io/img_post/p3_4.png">
+<meta property="article:published_time" content="2024-11-04T12:24:13.000Z">
+<meta property="article:modified_time" content="2024-11-04T15:45:15.288Z">
 <meta property="article:author" content="pzhwuhu">
 <meta property="article:tag" content="CO">
-<meta property="article:tag" content="mips">
+<meta property="article:tag" content="Logisim">
+<meta property="article:tag" content="CPU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://pzhwuhu.github.io/img/%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%9F%8E2.png">
+<meta name="twitter:image" content="http://pzhwuhu.github.io/img_post/p3_4.png">
   
   
   
-  <title>P2课上 - 鹏哥</title>
+  <title>P3课上技巧 - 鹏哥</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -236,7 +241,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="P2课上"></span>
+            <span id="subtitle" data-typed-text="P3课上技巧"></span>
           
         </div>
 
@@ -252,8 +257,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-22 00:48" pubdate>
-          2024年10月22日 凌晨
+        <time datetime="2024-11-04 20:24" pubdate>
+          2024年11月4日 晚上
         </time>
       </span>
     
@@ -264,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          740 字
+          1.2k 字
         
       </span>
     
@@ -275,7 +280,7 @@
         
         
         
-          7 分钟
+          10 分钟
         
       </span>
     
@@ -325,25 +330,50 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">P2课上</h1>
+            <h1 id="seo-header">P3课上技巧</h1>
             
             
               <div class="markdown-body">
                 
                 <div class="note note-info">
-            <p>通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容<br>本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。<br>题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异</p>
+            <p>通过阅读本文，你可以大致了解BUAA 2024秋季 P3课上添加指令的常见坑点和小技巧</p>
           </div>
 
-<h1 id="P2-Q1（Mooncake"><a href="#P2-Q1（Mooncake" class="headerlink" title="P2_Q1（Mooncake)"></a>P2_Q1（Mooncake)</h1><h2 id="大意"><a href="#大意" class="headerlink" title="大意"></a>大意</h2><p>中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼后，每人拿一个，直到剩下的数量 &lt; N，并将剩下的月饼还回去。要实现每个人拿到尽可能多的月饼，并减少还回去的负担，请你计算拿多少个月饼 （用K表示）合适，输出每个人<strong>拿完剩下的</strong>月饼数。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>纯数学题，读懂题意后，直接用 R &#x2F; N，再将结果乘 N ，结果用 x 表示，那么此时 x 就是保证每个人拿到尽可能多的月饼的总月饼数，例如：n &#x3D; 10, R &#x3D; 36，则x&#x3D;30。此时便得到了理想情况下拿的月饼数K，但是有一个最小值 L 限制，并注意要输出同学们拿剩下的月饼数，而不是K，故直接输出 x &lt; L ? L-x : 0。然后翻译。</p>
-<h1 id="P2-Q2"><a href="#P2-Q2" class="headerlink" title="P2_Q2"></a>P2_Q2</h1><h2 id="大意-1"><a href="#大意-1" class="headerlink" title="大意"></a>大意</h2><p>利用欧拉筛判断一个输入的数n是否为质数。大佬们说代码给的是欧式筛，我不太懂（逃）<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span></p>
-<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>没有思路，对着C代码翻译即可，也没有函数，无需维护变量，细心点，问题不大<span class="github-emoji" alias="smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">&#x1f604;</span></p>
-<h1 id="P3-Q3"><a href="#P3-Q3" class="headerlink" title="P3_Q3"></a>P3_Q3</h1><h2 id="大意-2"><a href="#大意-2" class="headerlink" title="大意"></a>大意</h2><p>这道题题面很长，有点麻烦，我没看，既然给了C代码，<del>直接肉编就好了</del> 😁</p>
-<p>听别人说是输出在一个有向图中从给定出发点出发可到达的出度为0的点的个数，假如出发点出度为0则直接输出0</p>
-<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>直接对着肉编，然后可以<strong>封装</strong>几个常用的函数为宏，比如<code>getInt</code> <code>putInt</code> <code>getIndex</code> <code>exit</code> ……（这几个宏很常用，<del>甚至可以开考前敲上去</del>）使用起来更加方便，也利于整体代码的美观与调试，值得一提的是，<strong>尽量避免在宏中使用寄存器</strong>，以此来避免可能的麻烦，除非迫不得已（如$a0, $v0等）,如果使用了寄存器，需<strong>注意上下文</strong>有无对寄存器值的维护或者压根这个寄存器就是随手用随手赋值的（这样并不被提倡）。</p>
-<p>对于本题，每次递归前后，维护好 <code>$ra</code> 寄存器以及<code>u</code> <code>i</code> 的值即可，建议编写、调用宏<code>push</code> <code>pop</code></p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>值得一提的是，本次Q3来自我们亲爱的助教 zygg ，上次上机后我还问过他谁出题这个事来着（<del>未经</del>）<span class="github-emoji" alias="laughing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">&#x1f606;</span>,他跟我说你下次上机就能初见端倪了。</p>
-<p>P2之后就是P3——单周期CPU的logisim实现了，加油！</p>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>做了两次P3，这次较为顺利，40min就整完了，从上周挂掉P3到现在，本人发现了不少大家共性的问题或者叫易错点，也有一些个人的经验与技巧，写在这里，希望下一届 的朋友们能够更加顺利地通过P3😁😁(●’◡’●)</p>
+<p>本人课下重构版如下：<img src="/../img_post/p3_4.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="易错点总结"><a href="#易错点总结" class="headerlink" title="易错点总结"></a>易错点总结</h2><p>其实大家添加指令或许并不成问题，但是可能会出现哪些问题呢？包括但不限于：</p>
+<ul>
+<li>1.输出信号值随意更改</li>
+<li>2.添加指令影响了已有指令</li>
+<li>3.没有预留充足空间和信号端口，导致添加指令麻烦、耗时长，也就容易产生问题</li>
+<li>4.课下充分测试，裸交一发，对了几个点的话就不要怀疑课下的bug了</li>
+</ul>
+<p>针对前三个问题，我分别给出错误示范和改进方法</p>
+<h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><p>参考我之前课上的设计，<img src="/../img_post/p3_0.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>Reg_Addr</code>是直接连接到输出信号的，表示寄存器写入地址，如果你在端口和这个Tunnel之间对信号做了处理，那会造成本地运行正确，但是交上去输出错误，且debug很困难</p>
+<ul>
+<li><strong>解决</strong>：就是将这种输出信号直接接在端口上，像这样,这样，你在更改信号，比如GRF_WA时，就直接在Tunnel前面改，如图红色箭头处，加MUX之类的</li>
+</ul>
+<p><img src="/../img_post/p3_6.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><p>这也是一个很常见的问题，我以第二次课上的一个题为例，来说一说</p>
+<p>第二次P3课上第一题为BA指令，RTL语言如下：</p>
+<p><code>ba rs, rt, offset</code></p>
+<p><code>ans &lt;- GRF(rs) ^ GRF(rt) </code>(按位异或)</p>
+<p>if <code>ans &lt; 0x10000</code> then</p>
+<p>​	<code>PC &lt;- PC +4 + sign_extend(ans[15:0] || 00)</code></p>
+<p>else </p>
+<p>​	<code>PC &lt;- PC +4 + sign_extend(offset[15:0] || 00)</code></p>
+<p>这其实就是<code>beq</code>指令的变体，对于<code>beq</code>指令，我是branch信号置1同时判断ALU相减结果是否为0来决定是否跳转，具体的跳转在NPC模块实现,对于此题发现只要该指令执行，就一定会跳转，同时ALU模块需要执行异或运算，也无法直接用zero信号，所以我<strong>选择了新输出一个信号，就叫new</strong>（事实上提前预留了端口，见Controller模块），只要该指令，则new为1，把new与之前的最终跳转信号或一下，连到NPC模块，即可</p>
+<p>接着看看跳转地址，可以直接在NPC输入端口前加一个MUX，根据判断条件选一个进去，就是这样![](..&#x2F;img_post&#x2F;p3_7 (2).png)</p>
+<p><strong>看起来似乎没啥问题，但这样是错的！！！</strong>，因为你把之前正常跳转<code>beq</code>的跳转地址也改了，回头想一想，我们<strong>只需要在执行这条新指令时这样选择，对于其他的指令，用之前的Tunnel就好了</strong>，想到这里后，实现就很简单了，<strong>对于每一条新指令，如果需要改变之前输入输出的端口，则加一个MUX，确保只对新指令作用，同时新增一个输出信号作为MUX的选择信号,由于新信号new只在新信号时为1，这样就保证了原来指令的正确性</strong><br>![](..&#x2F;img_post&#x2F;p3_7 (1).png)</p>
+<h2 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h2><p>我之前是这样设计的，课上修改数据通路，把我累的够呛，特别是在一些很小的地方加一些MUX，那简直了(┬┬﹏┬┬)，整个电路连线很复杂，也容易犯错<br><img src="/../img_post/p3_5.png" srcset="/img/loading.gif" lazyload></p>
+<p>因此，我对电路进行了重构，增加了很多的Tunnel，也扩大了空间，这样增添通路时更加方便，同时Controller预留了一个新的信号，到时候把指令在里面连起来，直接就能用,看起来也更加简洁，可能没那么直观只是。</p>
+<p><img src="/../img_post/p3_4.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><p>哈哈哈，问答时助教还问我CPU画的怎么这么好看，嘻嘻😎😎😆😆，<code>Logisim</code>可以直接编辑子电路外观、形状、颜色，大家自行搜索学习即可，确实好看很多<del>颜狗来了</del></p>
+<p>P3挂了，唉唉，但回头一想，也没啥，今晚P4似乎难度不小，感觉很多人没出来，如果我今晚做P4，说不定也挂，下次兴许能简单点！？（<del>未经</del>），不知道，全面准备吧。</p>
+<p>最后送大家一句话：</p>
+<p><strong>请不要相信胜利就像山坡上的蒲公英一样唾手可得，但请相信，世上总有美好值得自己全力以赴，哪怕粉身碎骨</strong></p>
+<p>😊😊😊</p>
 
                 
               </div>
@@ -386,7 +416,9 @@
       
         <a href="/tags/CO/" class="print-no-link">#CO</a>
       
-        <a href="/tags/mips/" class="print-no-link">#mips</a>
+        <a href="/tags/Logisim/" class="print-no-link">#Logisim</a>
+      
+        <a href="/tags/CPU/" class="print-no-link">#CPU</a>
       
     </div>
   
@@ -398,8 +430,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>P2课上</div>
-      <div>http://pzhwuhu.github.io/2024/10/22/P2课上/</div>
+      <div>P3课上技巧</div>
+      <div>http://pzhwuhu.github.io/2024/11/04/P3课上技巧/</div>
     </div>
     <div class="license-meta">
       
@@ -411,13 +443,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月22日</div>
+          <div>2024年11月4日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年10月23日</div>
+          <div>2024年11月4日</div>
         </div>
       
       
@@ -460,18 +492,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/11/01/P3%E8%AF%BE%E4%B8%8A/" title="P3课上">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">P3课上</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/20/%E7%83%AD%E5%8A%9B%E5%AD%A6%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0/" title="热力学基础复习">
-                        <span class="hidden-mobile">热力学基础复习</span>
+                      <a href="/2024/11/04/P3%E8%AF%BE%E4%B8%8B/" title="P3课下">
+                        <span class="hidden-mobile">P3课下</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

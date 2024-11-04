@@ -19,25 +19,25 @@
   <meta name="author" content="pzhwuhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异             P2_Q1（Mooncake)大意中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼">
+    <meta name="description" content="CPU设计部分概述本次笔者用logisim搭建了一个单周期CPU，能够处理9条指令，分别为add sub ori lw sw beq lui nop，采用模块化和层次化设计，让结构更加清晰明了。所设计的模块如下：  IFU 取指令单元，通过PC的值来确定当前要执行的指令 GRF 通用寄存器组，通过该模块实现对32个通用寄存器的读和写 ALU 算术逻辑运算单元 DM 数据存储器，通过RAM实现 NP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="P2课上">
-<meta property="og:url" content="http://pzhwuhu.github.io/2024/10/22/P2%E8%AF%BE%E4%B8%8A/index.html">
+<meta property="og:title" content="P3课下">
+<meta property="og:url" content="http://pzhwuhu.github.io/2024/11/04/P3%E8%AF%BE%E4%B8%8B/index.html">
 <meta property="og:site_name" content="鹏哥">
-<meta property="og:description" content="通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异             P2_Q1（Mooncake)大意中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼">
+<meta property="og:description" content="CPU设计部分概述本次笔者用logisim搭建了一个单周期CPU，能够处理9条指令，分别为add sub ori lw sw beq lui nop，采用模块化和层次化设计，让结构更加清晰明了。所设计的模块如下：  IFU 取指令单元，通过PC的值来确定当前要执行的指令 GRF 通用寄存器组，通过该模块实现对32个通用寄存器的读和写 ALU 算术逻辑运算单元 DM 数据存储器，通过RAM实现 NP">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://pzhwuhu.github.io/img/%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%9F%8E2.png">
-<meta property="article:published_time" content="2024-10-21T16:48:13.000Z">
-<meta property="article:modified_time" content="2024-10-22T17:58:10.697Z">
+<meta property="og:image" content="http://pzhwuhu.github.io/img/%E9%AD%94%E5%A5%B3%E5%AE%85%E6%80%A5%E4%BE%BF1.jpg">
+<meta property="article:published_time" content="2024-11-04T12:23:20.000Z">
+<meta property="article:modified_time" content="2024-11-04T12:28:57.880Z">
 <meta property="article:author" content="pzhwuhu">
 <meta property="article:tag" content="CO">
-<meta property="article:tag" content="mips">
+<meta property="article:tag" content="CPU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://pzhwuhu.github.io/img/%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%9F%8E2.png">
+<meta name="twitter:image" content="http://pzhwuhu.github.io/img/%E9%AD%94%E5%A5%B3%E5%AE%85%E6%80%A5%E4%BE%BF1.jpg">
   
   
   
-  <title>P2课上 - 鹏哥</title>
+  <title>P3课下 - 鹏哥</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -236,7 +236,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="P2课上"></span>
+            <span id="subtitle" data-typed-text="P3课下"></span>
           
         </div>
 
@@ -252,8 +252,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-22 00:48" pubdate>
-          2024年10月22日 凌晨
+        <time datetime="2024-11-04 20:23" pubdate>
+          2024年11月4日 晚上
         </time>
       </span>
     
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          740 字
+          1.7k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          7 分钟
+          15 分钟
         
       </span>
     
@@ -325,25 +325,648 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">P2课上</h1>
+            <h1 id="seo-header">P3课下</h1>
             
             
               <div class="markdown-body">
                 
-                <div class="note note-info">
-            <p>通过阅读本文，你可以大致了解BUAA 2024秋季 P2课上测试的相关内容<br>本次主要考察MIPS汇编，第一题很easy，二三题都给了C代码，直接翻译即可。<br>题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异</p>
-          </div>
-
-<h1 id="P2-Q1（Mooncake"><a href="#P2-Q1（Mooncake" class="headerlink" title="P2_Q1（Mooncake)"></a>P2_Q1（Mooncake)</h1><h2 id="大意"><a href="#大意" class="headerlink" title="大意"></a>大意</h2><p>中秋之际，小班长为同学们搬月饼。小班 N 个人，最少搬 L 个月饼， 最多搬 R 个月饼。搬来月饼后，每人拿一个，直到剩下的数量 &lt; N，并将剩下的月饼还回去。要实现每个人拿到尽可能多的月饼，并减少还回去的负担，请你计算拿多少个月饼 （用K表示）合适，输出每个人<strong>拿完剩下的</strong>月饼数。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>纯数学题，读懂题意后，直接用 R &#x2F; N，再将结果乘 N ，结果用 x 表示，那么此时 x 就是保证每个人拿到尽可能多的月饼的总月饼数，例如：n &#x3D; 10, R &#x3D; 36，则x&#x3D;30。此时便得到了理想情况下拿的月饼数K，但是有一个最小值 L 限制，并注意要输出同学们拿剩下的月饼数，而不是K，故直接输出 x &lt; L ? L-x : 0。然后翻译。</p>
-<h1 id="P2-Q2"><a href="#P2-Q2" class="headerlink" title="P2_Q2"></a>P2_Q2</h1><h2 id="大意-1"><a href="#大意-1" class="headerlink" title="大意"></a>大意</h2><p>利用欧拉筛判断一个输入的数n是否为质数。大佬们说代码给的是欧式筛，我不太懂（逃）<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span></p>
-<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>没有思路，对着C代码翻译即可，也没有函数，无需维护变量，细心点，问题不大<span class="github-emoji" alias="smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">&#x1f604;</span></p>
-<h1 id="P3-Q3"><a href="#P3-Q3" class="headerlink" title="P3_Q3"></a>P3_Q3</h1><h2 id="大意-2"><a href="#大意-2" class="headerlink" title="大意"></a>大意</h2><p>这道题题面很长，有点麻烦，我没看，既然给了C代码，<del>直接肉编就好了</del> 😁</p>
-<p>听别人说是输出在一个有向图中从给定出发点出发可到达的出度为0的点的个数，假如出发点出度为0则直接输出0</p>
-<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>直接对着肉编，然后可以<strong>封装</strong>几个常用的函数为宏，比如<code>getInt</code> <code>putInt</code> <code>getIndex</code> <code>exit</code> ……（这几个宏很常用，<del>甚至可以开考前敲上去</del>）使用起来更加方便，也利于整体代码的美观与调试，值得一提的是，<strong>尽量避免在宏中使用寄存器</strong>，以此来避免可能的麻烦，除非迫不得已（如$a0, $v0等）,如果使用了寄存器，需<strong>注意上下文</strong>有无对寄存器值的维护或者压根这个寄存器就是随手用随手赋值的（这样并不被提倡）。</p>
-<p>对于本题，每次递归前后，维护好 <code>$ra</code> 寄存器以及<code>u</code> <code>i</code> 的值即可，建议编写、调用宏<code>push</code> <code>pop</code></p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>值得一提的是，本次Q3来自我们亲爱的助教 zygg ，上次上机后我还问过他谁出题这个事来着（<del>未经</del>）<span class="github-emoji" alias="laughing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">&#x1f606;</span>,他跟我说你下次上机就能初见端倪了。</p>
-<p>P2之后就是P3——单周期CPU的logisim实现了，加油！</p>
+                <h1 id="CPU设计部分"><a href="#CPU设计部分" class="headerlink" title="CPU设计部分"></a>CPU设计部分</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本次笔者用<code>logisim</code>搭建了一个单周期<code>CPU</code>，能够处理9条指令，分别为<code>add</code> <code>sub</code> <code>ori</code> <code>lw</code> <code>sw</code> <code>beq</code> <code>lui</code> <code>nop</code>，采用模块化和层次化设计，让结构更加清晰明了。所设计的模块如下：</p>
+<ul>
+<li><code>IFU</code> 取指令单元，通过<code>PC</code>的值来确定当前要执行的指令</li>
+<li><code>GRF</code> 通用寄存器组，通过该模块实现对32个通用寄存器的读和写</li>
+<li><code>ALU</code> 算术逻辑运算单元</li>
+<li><code>DM</code> 数据存储器，通过<code>RAM</code>实现</li>
+<li><code>NPC</code> 计算Next_PC</li>
+<li><code>Controller</code> 控制器，解析<code>funct</code> 和<code>op</code> 从而将相应的控制信号置0、1</li>
+<li>最终效果如图：</li>
+</ul>
+<p><img src="/../img_post/p3_4.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="数据通路部件"><a href="#数据通路部件" class="headerlink" title="数据通路部件"></a>数据通路部件</h2><h3 id="IFU：指令单元"><a href="#IFU：指令单元" class="headerlink" title="IFU：指令单元"></a>IFU：指令单元</h3><p>该模块包含<code>PC</code> 和 <code>IM</code>两部分，分别为程序计数器和指令存储器。</p>
+<ul>
+<li>PC用寄存器直接实现，应具有异步复位功能，复位值为起始地址，地址范围为0x00003000 ~ 0x00006FFF</li>
+<li>IM用<code>ROM</code>实现，容量为 <strong>4096 * 32 bit</strong>. <code>ROM</code>的0位置对应 <code>PC</code> 为 0x00003000的指令</li>
+<li>不难发现 ROM 实际地址宽度仅需 12 位，这是因为每一条程序占32位，即4byte，每次地址改变是以4byte为最小单位进行的</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>信号名</th>
+<th>方向</th>
+<th>位宽</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>clk</code></td>
+<td>I</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td><code>reset</code></td>
+<td>I</td>
+<td>1</td>
+<td>异步复位信号</td>
+</tr>
+<tr>
+<td><code>Next_PC</code></td>
+<td>I</td>
+<td>32</td>
+<td>下一条指令的地址</td>
+</tr>
+<tr>
+<td><code>Instr</code></td>
+<td>O</td>
+<td>32</td>
+<td>正在执行的指令的编码</td>
+</tr>
+<tr>
+<td><code>PC</code></td>
+<td>O</td>
+<td>32</td>
+<td>当前执行指令的地址</td>
+</tr>
+</tbody></table>
+<h3 id="GRF-通用寄存器堆"><a href="#GRF-通用寄存器堆" class="headerlink" title="GRF:通用寄存器堆"></a>GRF:通用寄存器堆</h3><p>该模块P1课下已经实现了，直接用即可，copy copy ！（DMX记得开三态噢！<span class="github-emoji" alias="sweat_smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f605.png?v8">&#x1f605;</span>)</p>
+<table>
+<thead>
+<tr>
+<th>信号名</th>
+<th>方向</th>
+<th>位宽</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>RA1</code></td>
+<td>I</td>
+<td>5</td>
+<td>1_读取的寄存器编号</td>
+</tr>
+<tr>
+<td><code>RA2</code></td>
+<td>I</td>
+<td>5</td>
+<td>2_读取的寄存器编号</td>
+</tr>
+<tr>
+<td><code>WE</code></td>
+<td>I</td>
+<td>1</td>
+<td>寄存器写入使能端</td>
+</tr>
+<tr>
+<td><code>WA</code></td>
+<td>I</td>
+<td>5</td>
+<td>写入的寄存器编号</td>
+</tr>
+<tr>
+<td><code>WD</code></td>
+<td>I</td>
+<td>32</td>
+<td>写入寄存器的数据</td>
+</tr>
+<tr>
+<td><code>reset</code></td>
+<td>I</td>
+<td>1</td>
+<td>异步复位</td>
+</tr>
+<tr>
+<td><code>clk</code></td>
+<td>I</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td><code>RD1</code></td>
+<td>O</td>
+<td>32</td>
+<td>1_读取的寄存器数据</td>
+</tr>
+<tr>
+<td><code>RD2</code></td>
+<td>O</td>
+<td>32</td>
+<td>2_读取的寄存器数据</td>
+</tr>
+</tbody></table>
+<h3 id="ALU-算术逻辑运算单元"><a href="#ALU-算术逻辑运算单元" class="headerlink" title="ALU:算术逻辑运算单元"></a>ALU:算术逻辑运算单元</h3><h4 id="端口定义"><a href="#端口定义" class="headerlink" title="端口定义"></a>端口定义</h4><table>
+<thead>
+<tr>
+<th>信号名</th>
+<th>方向</th>
+<th>位宽</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>inA</code></td>
+<td>I</td>
+<td>32</td>
+<td>操作数1</td>
+</tr>
+<tr>
+<td><code>inB</code></td>
+<td>I</td>
+<td>32</td>
+<td>操作数2</td>
+</tr>
+<tr>
+<td><code>AluCtrol</code></td>
+<td>I</td>
+<td>4</td>
+<td>运算类型</td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td>O</td>
+<td>32</td>
+<td>运算结果</td>
+</tr>
+<tr>
+<td><code>zero</code></td>
+<td>O</td>
+<td>1</td>
+<td>结果是否为0</td>
+</tr>
+</tbody></table>
+<h4 id="运算编码"><a href="#运算编码" class="headerlink" title="运算编码"></a>运算编码</h4><table>
+<thead>
+<tr>
+<th>编码</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0000</td>
+<td>A + B</td>
+</tr>
+<tr>
+<td>0001</td>
+<td>A - B</td>
+</tr>
+<tr>
+<td>0010</td>
+<td>A &amp; B</td>
+</tr>
+<tr>
+<td>0011</td>
+<td>A or B</td>
+</tr>
+<tr>
+<td>0100</td>
+<td>加载立即数至高位</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="DM：数据存储器"><a href="#DM：数据存储器" class="headerlink" title="DM：数据存储器"></a>DM：数据存储器</h3><ul>
+<li>使用<code>RAM</code>实现，容量为 <strong>3072 * 32 bit</strong></li>
+<li>使用异步复位功能，复位值为0</li>
+<li><code>RAM</code>应使用双端口模式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>信号名</th>
+<th>方向</th>
+<th>位宽</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>clk</code></td>
+<td>I</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td><code>reset</code></td>
+<td>I</td>
+<td>1</td>
+<td>异步复位信号</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>I</td>
+<td>32</td>
+<td>内存地址</td>
+</tr>
+<tr>
+<td><code>WD</code></td>
+<td>I</td>
+<td>32</td>
+<td>写入的数据</td>
+</tr>
+<tr>
+<td><code>WE</code></td>
+<td>I</td>
+<td>1</td>
+<td>写入使能</td>
+</tr>
+<tr>
+<td><code>RD</code></td>
+<td>O</td>
+<td>32</td>
+<td>读出的数据</td>
+</tr>
+</tbody></table>
+<h3 id="EXT：扩展单元"><a href="#EXT：扩展单元" class="headerlink" title="EXT：扩展单元"></a>EXT：扩展单元</h3><p>直接使用<code>logisim</code>自带的<code>extender</code>即可，但是注意既有符号扩展又有0扩展（such as ori)</p>
+<table>
+<thead>
+<tr>
+<th>信号名</th>
+<th>方向</th>
+<th>位宽</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>in</code></td>
+<td>I</td>
+<td>16</td>
+<td>待扩展的信号</td>
+</tr>
+<tr>
+<td><code>ExtOp</code></td>
+<td>I</td>
+<td>1</td>
+<td>扩展方式选择信号（为0则0扩展）</td>
+</tr>
+<tr>
+<td><code>Out</code></td>
+<td>O</td>
+<td>32</td>
+<td>扩展的结果</td>
+</tr>
+</tbody></table>
+<h3 id="NPC：指令地址单元"><a href="#NPC：指令地址单元" class="headerlink" title="NPC：指令地址单元"></a>NPC：指令地址单元</h3><p><code>Next_PC</code>一共有 3 种情况，分别为 PC + 4、PC + 4 + <code>offest </code>&lt;&lt; 2 (<code>beq</code> 指令) 、<code>Imm</code>26 -&gt; <code>Imm</code>32(j 指令)，端口定义如下</p>
+<table>
+<thead>
+<tr>
+<th>信号名</th>
+<th>方向</th>
+<th>位宽</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PC</code></td>
+<td>I</td>
+<td>32</td>
+<td>当前指令地址</td>
+</tr>
+<tr>
+<td><code>offest</code></td>
+<td>I</td>
+<td>16</td>
+<td><code>beq</code>指令的相对偏移量</td>
+</tr>
+<tr>
+<td><code>Imm</code></td>
+<td>I</td>
+<td>16</td>
+<td>j指令的26位跳转地址</td>
+</tr>
+<tr>
+<td><code>branch</code></td>
+<td>I</td>
+<td>1</td>
+<td>是否分支（<code>beq</code>)</td>
+</tr>
+<tr>
+<td><code>if_j</code></td>
+<td>I</td>
+<td>1</td>
+<td>是否j跳转</td>
+</tr>
+<tr>
+<td><code>Next_PC</code></td>
+<td>O</td>
+<td>32</td>
+<td>下一条指令的地址</td>
+</tr>
+</tbody></table>
+<h2 id="控制器设计"><a href="#控制器设计" class="headerlink" title="控制器设计"></a>控制器设计</h2><h3 id="与逻辑模块"><a href="#与逻辑模块" class="headerlink" title="与逻辑模块"></a>与逻辑模块</h3><p>先根据指令的<code>opcode</code> 和 <code>funct</code> 来确定具体的指令类型，见下表R指令类型</p>
+<table>
+<thead>
+<tr>
+<th>R型指令</th>
+<th>Opcode</th>
+<th>Rs</th>
+<th>Rt</th>
+<th>Rd</th>
+<th>Shamt</th>
+<th>Funct</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add rd rs rt</td>
+<td>000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>XXXXX</td>
+<td>100000</td>
+</tr>
+<tr>
+<td>sub rd rs rt</td>
+<td>000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>XXXXX</td>
+<td>100010</td>
+</tr>
+</tbody></table>
+<p>再来看看I型指令：</p>
+<table>
+<thead>
+<tr>
+<th>I型指令</th>
+<th>Opcode</th>
+<th>Rs</th>
+<th>Rt</th>
+<th>16 bits offest</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ori rt rs Imm</td>
+<td>001101</td>
+<td>rs</td>
+<td>rt</td>
+<td>Imm16</td>
+</tr>
+<tr>
+<td>lui rt Imm</td>
+<td>001111</td>
+<td>rs</td>
+<td>rt</td>
+<td>Imm16</td>
+</tr>
+<tr>
+<td>lw rt Imm(rs)</td>
+<td>100011</td>
+<td>rs</td>
+<td>rt</td>
+<td>Imm16</td>
+</tr>
+<tr>
+<td>sw rt Imm(rs)</td>
+<td>101011</td>
+<td>rs</td>
+<td>rt</td>
+<td>Imm16</td>
+</tr>
+<tr>
+<td>beq rs rt Imm</td>
+<td>000100</td>
+<td>rs</td>
+<td>rt</td>
+<td>Imm16</td>
+</tr>
+</tbody></table>
+<p>J指令：</p>
+<table>
+<thead>
+<tr>
+<th>J型指令</th>
+<th>Opcode</th>
+<th>address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>J target</td>
+<td>000010</td>
+<td>target_26bit</td>
+</tr>
+<tr>
+<td>Jr <code>$rs</code></td>
+<td>000000(<code>funct:</code> 001000)</td>
+<td>$rs</td>
+</tr>
+<tr>
+<td>Jal target</td>
+<td>000011</td>
+<td>target_26bit &amp; $ra &#x3D; PC+4</td>
+</tr>
+</tbody></table>
+<p>当然，也可以加入其他的指令来扩展功能，有了上表，我们就可以来设计与逻辑模块了……</p>
+<h3 id="或逻辑模块"><a href="#或逻辑模块" class="headerlink" title="或逻辑模块"></a>或逻辑模块</h3><p>在这部分中，我们要根据与逻辑输出的具体指令来指定各个控制信号的高低电平，以此来实现对整个电路的控制。与此同时，这部分要求我们将各条指令的执行过程谙熟于心。</p>
+<h4 id="总控信号说明"><a href="#总控信号说明" class="headerlink" title="总控信号说明"></a>总控信号说明</h4><table>
+<thead>
+<tr>
+<th>信号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Reg_Write</code></td>
+<td>寄存器文件写入使能端</td>
+</tr>
+<tr>
+<td><code>DM_Write</code></td>
+<td>内存区域写入使能端</td>
+</tr>
+<tr>
+<td><code>Reg_Dst</code></td>
+<td>决定被写入寄存器在指令中的位置，0为I型，1为R型</td>
+</tr>
+<tr>
+<td><code>MemtoReg</code></td>
+<td>决定写入寄存器的是Alu结果还是DM取出的数据（if 1 :DM)</td>
+</tr>
+<tr>
+<td><code>Alu_Op</code></td>
+<td>决定Alu运算方式，见Alu表</td>
+</tr>
+<tr>
+<td><code>Alu_Src</code></td>
+<td>决定Alu 第二个运算数为 寄存器还是立即数，0为寄存器</td>
+</tr>
+<tr>
+<td><code>Ext_Ctrl</code></td>
+<td>决定扩展方式，0表示0扩展，1为符号扩展</td>
+</tr>
+<tr>
+<td><code>Branch</code></td>
+<td>是否分支，1 as 分支</td>
+</tr>
+<tr>
+<td><code>If_Jump</code></td>
+<td>是否跳转，1 as 为跳转</td>
+</tr>
+</tbody></table>
+<h4 id="指令对应的控制信号"><a href="#指令对应的控制信号" class="headerlink" title="指令对应的控制信号"></a>指令对应的控制信号</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th><code>Reg_Write</code></th>
+<th><code>DM_Write</code></th>
+<th><code>Reg_Dst</code></th>
+<th><code>MemtoReg</code></th>
+<th><code>Alu_Op</code></th>
+<th><code>Alu_Src</code></th>
+<th><code>Ext_Ctrl</code></th>
+<th><code>Branch</code></th>
+<th><code>If_Jump</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0000</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>sub</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0001</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ori</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0011</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>lui</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0100</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>lw</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0000</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>0</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+<td>0000</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>0</td>
+<td>0</td>
+<td>x</td>
+<td>x</td>
+<td>0001</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>J</td>
+<td>0</td>
+<td>0</td>
+<td>x</td>
+<td>x</td>
+<td>xxxx</td>
+<td>x</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Jr</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0101</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Jal</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><ol>
+<li><p>上面我们介绍了通过 FSM 理解单周期 CPU 的基本方法。请大家指出单周期 CPU 所用到的模块中，哪些发挥状态存储功能，哪些发挥状态转移功能。</p>
+<ul>
+<li>状态存储：IFU、DM、GRF</li>
+<li>状态转移：NPC、Controller</li>
+</ul>
+</li>
+<li><p>现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用 Register，这种做法合理吗？ 请给出分析，若有改进意见也请一并给出。</p>
+<ul>
+<li>合理，因为IM中的指令是只需要被读取解析的，使用ROM只有读取功能；而DM是数据存储器，需要读出和写入，因此需要使用RAM，同时不能用寄存器，因为我们需要的内存量非常的大，有限的Register无法满足；而GRF用寄存器堆实现则可以实现高速的读写，同时与ALU的输入相连，送操作数或者存储中间变量，使用寄存器快速读写较合理。</li>
+</ul>
+</li>
+<li><p>在上述提示的模块之外，你是否在实际实现时设计了其他的模块？如果是的话，请给出介绍和设计的思路。</p>
+<ul>
+<li>我只增加了一个NPC模块，因为自行增加了J指令，PC的计算方式有 PC + 4, PC + 4 + offset&lt;&lt;2 , label，甚至如果加入jr指令的话，还会直接赋值为寄存器的值，考虑到后续扩展问题，引入NPC模块</li>
+</ul>
+</li>
+<li><p>事实上，实现 <code>nop</code> 空指令，我们并不需要将它加入控制信号真值表，为什么？</p>
+<ul>
+<li>因为<code>nop</code>指令相当于<code>sll $0, $0, 0</code>,对应的操作码为0x0000_0000,因为0移动0位还是0，，并且0号寄存器不能写入，所以无需加入控制信号表。同时该指令有时被用于空循环，有时被编译器用于与体系结构相关的编译优化。</li>
+</ul>
+</li>
+<li><p>阅读 Pre 的 <a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/mips/mips-6/mips6-1/">“MIPS 指令集及汇编语言”</a> 一节中给出的测试样例，评价其强度（可从各个指令的覆盖情况，单一指令各种行为的覆盖情况等方面分析），并指出具体的不足之处。</p>
+<ul>
+<li>数据强度不够，没有涉及int边界附近的较大的数据的测试，没有覆盖边界情况</li>
+<li>只测试了少数寄存器，并未对所有寄存器的读写进行测试，虽然有些寄存器实际上并不需要读写，如1号寄存器</li>
+<li>跳转范围不够，没有测试向前跳转、本行跳转，也没有测试嵌套跳转、循环跳转等特殊情况</li>
+</ul>
+</li>
+</ol>
 
                 
               </div>
@@ -386,7 +1009,7 @@
       
         <a href="/tags/CO/" class="print-no-link">#CO</a>
       
-        <a href="/tags/mips/" class="print-no-link">#mips</a>
+        <a href="/tags/CPU/" class="print-no-link">#CPU</a>
       
     </div>
   
@@ -398,8 +1021,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>P2课上</div>
-      <div>http://pzhwuhu.github.io/2024/10/22/P2课上/</div>
+      <div>P3课下</div>
+      <div>http://pzhwuhu.github.io/2024/11/04/P3课下/</div>
     </div>
     <div class="license-meta">
       
@@ -411,13 +1034,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月22日</div>
+          <div>2024年11月4日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年10月23日</div>
+          <div>2024年11月4日</div>
         </div>
       
       
@@ -460,9 +1083,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/11/01/P3%E8%AF%BE%E4%B8%8A/" title="P3课上">
+                      <a href="/2024/11/04/P3%E8%AF%BE%E4%B8%8A%E6%8A%80%E5%B7%A7/" title="P3课上技巧">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">P3课上</span>
+                        <span class="hidden-mobile">P3课上技巧</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -470,8 +1093,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/20/%E7%83%AD%E5%8A%9B%E5%AD%A6%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0/" title="热力学基础复习">
-                        <span class="hidden-mobile">热力学基础复习</span>
+                      <a href="/2024/11/01/P3%E8%AF%BE%E4%B8%8A/" title="P3课上">
+                        <span class="hidden-mobile">P3课上</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
