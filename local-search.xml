@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>OOpre课程总结</title>
+    <link href="/2024/11/09/OOpre%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/"/>
+    <url>/2024/11/09/OOpre%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/</url>
+    
+    <content type="html"><![CDATA[<p>我太爱OOP啦，非常不错的一次体验，好想继续迭代，但是计组让我喘不过气来捏 <span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span><span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span><span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span><br><img src="/../img_post/oop.png"></p><h1 id="最终架构"><a href="#最终架构" class="headerlink" title="最终架构"></a>最终架构</h1><p><img src="/../img_post/oop1.png"></p><p>我的整个架构中<strong>类</strong>的个数并不多，仅在前几次迭代给<code>Bottle</code>和<code>Equipment</code> 增加了几个子类，并没有对战斗、副本等操作增加新的类或者接口，而是全部集成在了<code>Adventure</code>类中,可能实现上简单，但是这样导致我的<code>Adventure</code>类过于臃肿，其下的子方法过多</p><p><img src="/../img_post/oop2.png"></p><p>这样<strong>不利于调试和增量开发以及类和方法的复用，</strong>归根结底还是有点懒，懒得折腾，直接在<code>Adventure</code>类下写一个方法得了🫠</p><p><strong>以后还是要多多改进</strong></p><h2 id="迭代调整"><a href="#迭代调整" class="headerlink" title="迭代调整"></a>迭代调整</h2><p>给<code>Mainclass</code>中的每一种操作增加对应的case方法，传相应的参数进去。这样使得整体结构较为清晰，<del>也不会超过方法的行数</del></p><p><img src="/../img_post/oop3.png"></p><h1 id="使用Junit的心得体会"><a href="#使用Junit的心得体会" class="headerlink" title="使用Junit的心得体会"></a>使用Junit的心得体会</h1><ul><li>使用<code>Junit</code>可以很方便快捷地进行单元测试，从而知道一个方法是否正确执行，这样可以让我们在整体运行测试之前，先对各个单元进行充分测试，很有效地降低了测试的难度。</li><li>同一类方法可以copy一些语句，比如测试<code>Bottle</code>类的许多方法，都需要我们先实例化一个饼子，这时候就可以<strong>写一个通用的模版</strong>，从而节省时间</li><li>不同的类测试有先后顺序，应该<strong>先测试</strong>基本的独立的方法，再测试需要调用该方法的方法。</li></ul><h1 id="OOpre心得体会"><a href="#OOpre心得体会" class="headerlink" title="OOpre心得体会"></a>OOpre心得体会</h1><p>在本课程中，我经历了从面向过程编程（POP）到面向对象编程（OOP）的转变。这一转变让我对编程有了更深的理解。</p><ul><li>从前我们写C语言程序，通常会注重过程，也就是一系列按顺序执行的步骤。程序通常是围绕“做什么、怎么做”来设计的，主要通过函数来组织代码</li><li>但是OOP要求我们把<strong>问题抽象成具有属性和行为（方法）的对象，并让这些对象之间进行交互</strong>。这种方式更加贴近我们对现实世界的认知，我们所要解决的问题也更加切合实际，比如指导书中的宠物店、迭代中的类似原神的冒险者游戏，都很贴近我们的生活</li><li>从面向过程转向面向对象时，<strong>最大的挑战是要学会将问题抽象为一个模型</strong>，而不是简单地按顺序编写代码。（<em>本课程中这一点指导书已经帮我们完成了</em>）这种抽象能力的提升可以帮助我们更好地组织代码的结构，有一个全局的掌握，并提高代码的复用性和可扩展性</li><li>面向对象编程真正让我感受到<strong>“模块化”的威力</strong>。当项目规模变大时，面向对象的设计方式使得整个系统更容易理解和扩展，同时，由于<strong>封装性的提高</strong>，对象内部的修改对外部代码影响较小，代码的可维护性也大大提升</li></ul><h1 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h1><ul><li>希望能够指导书的知识讲解与题目分隔开，从而更加清晰</li><li>指导书中，对于一些比较绕的文字表述，希望能够提供一些例子来具体说明，有时候纯文字确实有点抽象</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>OO</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>OOpre</tag>
+      
+      <tag>总结</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>P3课上易错点</title>
     <link href="/2024/11/04/P3%E8%AF%BE%E4%B8%8A%E6%8A%80%E5%B7%A7/"/>
     <url>/2024/11/04/P3%E8%AF%BE%E4%B8%8A%E6%8A%80%E5%B7%A7/</url>
