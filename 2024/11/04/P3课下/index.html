@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://pzhwuhu.github.io/img/%E9%AD%94%E5%A5%B3%E5%AE%85%E6%80%A5%E4%BE%BF1.jpg">
 <meta property="article:published_time" content="2024-11-04T12:23:20.000Z">
-<meta property="article:modified_time" content="2024-11-04T12:28:57.880Z">
+<meta property="article:modified_time" content="2024-11-11T17:13:08.284Z">
 <meta property="article:author" content="pzhwuhu">
 <meta property="article:tag" content="CO">
 <meta property="article:tag" content="CPU">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.3k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          15 分钟
+          19 分钟
         
       </span>
     
@@ -880,8 +880,8 @@
 <td>sw</td>
 <td>0</td>
 <td>1</td>
-<td>x</td>
-<td>x</td>
+<td>0</td>
+<td>0</td>
 <td>0000</td>
 <td>1</td>
 <td>1</td>
@@ -892,8 +892,8 @@
 <td>beq</td>
 <td>0</td>
 <td>0</td>
-<td>x</td>
-<td>x</td>
+<td>0</td>
+<td>0</td>
 <td>0001</td>
 <td>0</td>
 <td>1</td>
@@ -904,9 +904,9 @@
 <td>J</td>
 <td>0</td>
 <td>0</td>
-<td>x</td>
-<td>x</td>
-<td>xxxx</td>
+<td>0</td>
+<td>0</td>
+<td>0000</td>
 <td>x</td>
 <td>0</td>
 <td>0</td>
@@ -930,7 +930,7 @@
 <td>0</td>
 <td>0</td>
 <td>0</td>
-<td></td>
+<td>0000</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
@@ -967,6 +967,43 @@
 </ul>
 </li>
 </ol>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="必看"><a href="#必看" class="headerlink" title="必看"></a>必看</h2><div class="note note-info">
+            <p><strong>每年都有奆佬发布评测机，大家多多关注</strong><br>这里提供几个工具，对于懒得折腾以及没有科学上网工具的同学，直接点击下面的链接下载即可，简单的配置方法我会讲</p>
+          </div>
+<p><a target="_blank" rel="noopener" href="https://bhpan.buaa.edu.cn/link/AA9CBB652F65F647ECB6C5F5C44B4732E8">我是链接，快点我</a></p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>一个是魔改MARS，能直接输出寄存器和内存的写入情况，与<code>$display</code>一致，来自<code>Toby-Shi</code>学长,<a target="_blank" rel="noopener" href="https://github.com/Toby-Shi-cloud/Mars-with-BUAA-CO-extension">链接在这里</a></p>
+<p>另一个是<code>logisim的debug工具</code>，一个是探针可以直接根据指令码显示当前的指令语言，另一个寄存器堆可以直接查看各个寄存器的值，也可以直接修改。</p>
+<h3 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h3><h4 id="魔改MARS"><a href="#魔改MARS" class="headerlink" title="魔改MARS"></a>魔改MARS</h4><p><strong>注意</strong>在Settings下勾选<code>Ignore Arithmetic Overflow</code>以及<code>Output Log level 1</code>,并在<code>Memory Configuration</code>下选择<code>large text</code>，这样可以一次运行4000多行<code>mips</code>代码(如果用不到这么大的测试数据也可以选第二个)</p>
+<h4 id="logisim-debug辅助工具"><a href="#logisim-debug辅助工具" class="headerlink" title="logisim debug辅助工具"></a>logisim debug辅助工具</h4><div class="note note-success">
+            <p>以下内容来源于讨论区助教帖子</p><p><strong>工具整合 &amp;&amp; 主题帖作者：徐俊豪助教</strong></p>
+          </div>
+
+<p>下载工具包，然后在 Logisim 中点击 Project - Load Library - JAR Library，选择刚刚下载的 jar 包，如图</p>
+<p><img src="/../img_post/p3_8.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>然后在左侧可以看到这两个元件，其中寄存器堆 <code>RegisterFile</code> 效果如下，可以直接看到寄存器的值，也可以直接对寄存器的值进行编辑，同学们在调试的时候可以用它替换自己的寄存器堆来方便地观察寄存器状态</p>
+          </div>
+
+<p>端口定义如下：</p>
+<ul>
+<li>RA1: 5 位读寄存器编号 1</li>
+<li>RA2: 5 位读寄存器编号 2</li>
+<li>WA: 5 位写寄存器编号</li>
+<li>WD: 32 位写入值</li>
+<li>WE: 1 位写使能</li>
+<li>RD1: 32 位读出值 1</li>
+<li>RD2: 32 位读出值 2</li>
+<li>clk（图中未标出，三角形那个）：1 位时钟信号</li>
+</ul>
+<p><img src="/../img_post/p3_10.jpg" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <p>Mips Probe 效果如下，可以直接将 32 位 MIPS 机器码翻译为汇编指令，支持本课程课下用到的全部指令及一些其它指令，同学们可以在调试时使用来查看机器码对应的汇编指令</p>
+          </div>
+
+<p><img src="/../img_post/p3_9.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><div class="note note-danger">
+            <ul><li><strong>该工具的导入会导致测评错误！！！因此强烈建议大家将电路复制一份来导入上述库进行调试</strong></li><li><strong>课上不会提供该工具</strong></li></ul>
+          </div>
 
                 
               </div>
@@ -1040,7 +1077,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年11月4日</div>
+          <div>2024年11月12日</div>
         </div>
       
       
@@ -1266,7 +1303,7 @@
   
   
   <span>
-    11k
+    21k
   </span>
 </div>
 
