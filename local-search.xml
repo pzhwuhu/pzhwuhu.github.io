@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>P6课上</title>
+    <link href="/2024/11/25/P6%E8%AF%BE%E4%B8%8A/"/>
+    <url>/2024/11/25/P6%E8%AF%BE%E4%B8%8A/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-info">            <p>通过阅读本文，你可以大致了解BUAA 2024秋季 P6课上测试的相关内容<br>题目每年都会发生变化，题面仅靠回忆，题意描述可能与原题有一定差异</p>          </div><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这次P6挂辽<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span></p><p>T1卡了老半天才A掉,确实不难，但是细节和小坑点比较多，自己一上来还是太心急了，没有把握好细节。</p><p>晃了一眼T2，是访存，按照经验，比较难受，果断切T3，可惜的是，“经验主义”并不总是对的，这次T2很容易，卡时间周期的反而是T3 的跳转，而我最后也就输在了最后一个点的TLE的上</p><h1 id="T1-mpm"><a href="#T1-mpm" class="headerlink" title="T1 mpm"></a>T1 mpm</h1><h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p>mpm rd, rs, rt</p><p>tmp1 &#x3D; GRF(rs) + GRF(rt) </p><p>k &#x3D; 0</p><p>for i in 32……0</p><p>​tmp2 &#x3D; 1 &lt;&lt;i</p><p>​        if(tmp2 &gt; tmp1) k &#x3D; i</p><p>endfor</p><p>GRF(rd) &#x3D; k</p><p>其实就是求最小的大于tmp1的2的幂</p><p><strong>忽略加法过程中的溢出</strong></p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接对着翻译差不多，不过几个细节需要注意</p><ul><li><strong>tmp2 应该至少为33位</strong>，因为tmp1 可能为0xffff_ffff，这样需要0x1_0000_0000才能大于tmp1，这一点从循环 i in 32……0也可以看出</li><li><strong>RTL语言中是从32遍历到0</strong>，而我们可能习惯的是0到32，这样的话无法求出“最小的”，因为当满足条件时，<strong>你缺少了一个break</strong></li></ul><p>毫无疑问，两个坑我都踩了，并且第一个坑我开始还把tmp1也改成33位的了，<strong>这样导致忽略溢出这一操作无法实现</strong>，并且我最后才发现这个问题<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span></p><p>至于第二个问题，也好办，如果你是32到0 的遍历，那没有任何问题，如果你是0到32 的遍历，需要在满足条件时直接把 i 赋值为32即可，因为verilog中没有break语句</p><h1 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h1><h2 id="题面-1"><a href="#题面-1" class="headerlink" title="题面"></a>题面</h2><p>没有详细的RTL语言，我就描述一下吧</p><p>跟正常的sw差不多，但是 high_1 &#x3D; GRF(rt)中最高位1 的位置，addr &#x3D; base + offset + high_1 || 00，</p><p>最后Mem[addr[31:2] || 00] &#x3D; GRF(rt)，大致是这样</p><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>感觉实现起来不难，DM加一个输入信号即可，可悲的是我并没有做这道题</p><h1 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h1><h2 id="题面-2"><a href="#题面-2" class="headerlink" title="题面"></a>题面</h2><p>似乎是叫mpl，不管了</p><p>大致是说</p><p>tmp &#x3D; GRF(rs) + GRF(rt)</p><p>如果rs &#x3D;&#x3D; rt，就跟beq一样跳转，否则如果rs rt奇偶性相同，就跳转到 tmp[31:2] || 00，如果都不满足就不跳</p><p><strong>无论是否跳转都要链接</strong></p><p><strong>注意比较的是rs  rt 本身这个编号，而不是寄存器的值</strong></p><h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>整体上搭建起来也不算太难，CMP， NPC新增端口， 加一点逻辑，不需要改基本上就可以实现</p><p>但是，你交上去，会发现你过了9个点，剩下的那个点会告诉你，<strong>你TLE了</strong></p><p>课下我基本已经全速了，只缺一个lui可以E到D的转发，懒得加了，后来证明，加这个还是会被卡</p><p>所以，也就是说，<strong>如果只将新指令的Tuse设为0，并且不对阻塞单元加点逻辑，那么一定会被卡</strong> <span class="github-emoji" alias="innocent" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f607.png?v8">&#x1f607;</span><del>助教坏坏</del></p><p>具体怎么办呢？我们发现<strong>并不是所有情况下这条新指令都需要使用寄存器</strong>，当且仅当 rs !&#x3D; rt &amp;&amp; rs[0] &#x3D;&#x3D; rt[0]的情况下才需要使用寄存器，那么我们就需要在阻塞单元加一个特判,举一个例子</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-keyword">assign</span> freeze_RS0_E2 = NewSign ? (D_A1 != D_A2 &amp;&amp; D_A1[<span class="hljs-number">0</span>] == D_A2[<span class="hljs-number">0</span>]) : 原来的逻辑<br></code></pre></td></tr></table></figure><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul><li>决策失误了，默认T2访存恶心，结果反倒简单,还是建议大家把3道题都读一读，思考一下，再做决策吧，不要像某人一样<span class="github-emoji" alias="innocent" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f607.png?v8">&#x1f607;</span></li><li>T1太过着急，细节没把握好，浪费大量时间</li><li>T3属实没想到这么卡时间，因为之前都是访存类W级才确定写寄存器和写数据，所以无脑阻塞2周期卡时间，这次属实没想到这么卡，有点阴间了</li></ul><h2 id="下次加油吧🫠"><a href="#下次加油吧🫠" class="headerlink" title="下次加油吧🫠"></a>下次加油吧🫠</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>CO</category>
+      
+      <category>实验</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CO</tag>
+      
+      <tag>Verilog</tag>
+      
+      <tag>CPU</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>P5课上</title>
     <link href="/2024/11/18/P5%E8%AF%BE%E4%B8%8A/"/>
     <url>/2024/11/18/P5%E8%AF%BE%E4%B8%8A/</url>
