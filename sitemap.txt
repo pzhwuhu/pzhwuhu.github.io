@@ -1,5 +1,7 @@
-http://pzhwuhu.github.io/2024/11/25/P6%E8%AF%BE%E4%B8%8A/
 http://pzhwuhu.github.io/2024/11/18/P5%E8%AF%BE%E4%B8%8B/
+http://pzhwuhu.github.io/2024/11/25/P6%E8%AF%BE%E4%B8%8A/
+http://pzhwuhu.github.io/2024/12/02/P6%E8%AF%BE%E4%B8%8B/
+http://pzhwuhu.github.io/css/custom_dark_mode.css
 http://pzhwuhu.github.io/about/index.html
 http://pzhwuhu.github.io/2024/11/18/P5%E8%AF%BE%E4%B8%8A/
 http://pzhwuhu.github.io/2024/11/04/P3%E8%AF%BE%E4%B8%8B/
@@ -20,10 +22,10 @@ http://pzhwuhu.github.io/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/
 http://pzhwuhu.github.io/tags/OOpre/
 http://pzhwuhu.github.io/tags/%E6%80%BB%E7%BB%93/
 http://pzhwuhu.github.io/tags/CO/
-http://pzhwuhu.github.io/tags/Verilog/
 http://pzhwuhu.github.io/tags/mips/
-http://pzhwuhu.github.io/tags/Logisim/
+http://pzhwuhu.github.io/tags/Verilog/
 http://pzhwuhu.github.io/tags/CPU/
+http://pzhwuhu.github.io/tags/Logisim/
 http://pzhwuhu.github.io/tags/%E7%89%A9%E7%90%86/
 http://pzhwuhu.github.io/tags/%E5%A4%8D%E4%B9%A0/
 http://pzhwuhu.github.io/categories/%E6%97%A5%E5%B8%B8/
