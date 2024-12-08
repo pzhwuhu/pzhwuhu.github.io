@@ -189,20 +189,6 @@
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/tags/OOpre/</loc>
-    <lastmod>2024-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://pzhwuhu.github.io/tags/%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2024-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://pzhwuhu.github.io/tags/CO/</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -217,7 +203,21 @@
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/tags/CPU/</loc>
+    <loc>http://pzhwuhu.github.io/tags/OOpre/</loc>
+    <lastmod>2024-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://pzhwuhu.github.io/tags/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2024-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://pzhwuhu.github.io/tags/mips/</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -231,7 +231,7 @@
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/tags/mips/</loc>
+    <loc>http://pzhwuhu.github.io/tags/CPU/</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -261,14 +261,14 @@
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/categories/OO/</loc>
+    <loc>http://pzhwuhu.github.io/categories/CO/</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/categories/CO/</loc>
+    <loc>http://pzhwuhu.github.io/categories/OO/</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
