@@ -4,7 +4,63 @@
   
   
   <entry>
-    <title>P6课下</title>
+    <title>图论复习</title>
+    <link href="/2024/12/22/%E5%9B%BE%E8%AE%BA%E5%A4%8D%E4%B9%A0/"/>
+    <url>/2024/12/22/%E5%9B%BE%E8%AE%BA%E5%A4%8D%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一、图的基本概念"><a href="#一、图的基本概念" class="headerlink" title="一、图的基本概念"></a>一、图的基本概念</h1><h2 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h2><ul><li>有向图</li><li>无向图</li></ul><h2 id="节点和边的关系"><a href="#节点和边的关系" class="headerlink" title="节点和边的关系"></a>节点和边的关系</h2><h3 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h3><p>G &#x3D; &lt;V, E, Ψ &gt;，e, e1, e2 ∈ E 且v1, v2 ∈V</p><ul><li>如果Ψ(e) &#x3D;{v1,v2}，则称e 与 v1 （或v2）互相<strong>关联</strong>（incident）</li><li>e 连接 v1和 v2，v1和 v2 既是 e 的起点，也是 e 的终点，也称 <strong>v1 和 v2</strong> <strong>邻接</strong></li><li>如果两条不同边 e1 和 e2 与同一个结点关联，则称 <strong>e1 和 e2 邻接</strong></li></ul><h3 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h3><p>有向图 G &#x3D; &lt;V, E, Ψ &gt;，e, e1, e2 ∈ E且v1, v2 ∈V</p><ul><li>如果Ψ(e) &#x3D;&lt;v1,v2&gt;，则称e 与 v1 （或v2）互相<strong>关联</strong>（incident）</li><li>e 连接 v1和 v2，v1是 e 的起点，v2是 e 的终点，称 <strong>v1 和 v2</strong> <strong>邻</strong><br><strong>接</strong></li></ul><h2 id="自圈，平行边-简单图"><a href="#自圈，平行边-简单图" class="headerlink" title="自圈，平行边,简单图"></a>自圈，平行边,简单图</h2><p>设图 G &#x3D; &lt;V, E, Ψ &gt; ，e1 和 e2 是 G 的两条不同边。</p><ul><li>如果与e1关联的两个结点相同，则称 e1为**自圈(**self loop)</li><li>如果 Ψ(e1) &#x3D; Ψ(e2)，则称 e1 与 e2 <strong>平行</strong></li><li>如果图 G 没有自圈，也没有平行边，则称G为<strong>简单图</strong></li></ul><h2 id="节点的度"><a href="#节点的度" class="headerlink" title="节点的度"></a>节点的度</h2><h3 id=""><a href="#" class="headerlink" title=""></a><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222152103367.png"></h3><ul><li>度为奇数的节点成为<strong>奇节点</strong></li><li>度为偶数的节点成为<strong>偶节点</strong></li><li>度为0的节点成为<strong>独&#x2F;孤立点</strong></li><li>度为1的节点成为<strong>端点</strong></li><li><strong>任何图中都有偶数个奇节点</strong>（定理1.3）</li></ul><h2 id="握手定理"><a href="#握手定理" class="headerlink" title="握手定理"></a>握手定理</h2><ul><li>设无向图 G &#x3D; &lt;V, E, Ψ &gt;有m条边，则$\sum_{v∈V} d_{G(v)} &#x3D; 2m$ </li><li>设有向图 G &#x3D; &lt;V, E, Ψ &gt; 有 m 条边， 则$\sum_{v∈V} d_{G(v)}^+ &#x3D; \sum_{v∈V} d_{G(v)}^- &#x3D; m$且$\sum_{v∈V} d_{G(v)}&#x3D; 2m$ .</li></ul><h2 id="几类特殊的图"><a href="#几类特殊的图" class="headerlink" title="几类特殊的图"></a>几类特殊的图</h2><ul><li>结点都是孤立点的图称为<strong>零图</strong></li><li>一阶零图称为<strong>平凡图</strong></li><li>所有结点的度均为自然数 d 的无向图称为 <strong>d 度正则图</strong></li></ul><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222152628263.png"></p><ul><li>设 n ∈ I+ ，如果 n 阶简单无向图 G 是 n-1 度正则图，则称 G 为 <strong>完全无向图</strong>，记为$K_n$</li><li>设 n ∈I+ ，每个结点的出度和入度均为 n-1 的 n 阶简单<br>有向图称为 <strong>完全有向图</strong></li><li>设 G是n阶简单无向图（ n³3）, 若n 个结点恰形成一个圈，则称 G 为<strong>圈图</strong></li><li>设 G是n阶简单无向图（ n³3）, 若n-1 个结点恰形成一个圈图，且第n个结点与圈图上的每个结点邻接，则称G 为<strong>轮图</strong></li><li>二分图</li></ul><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222153821149.png"></p><h2 id="同构"><a href="#同构" class="headerlink" title="同构"></a>同构</h2><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222153457701.png"></p><h1 id="二、子图"><a href="#二、子图" class="headerlink" title="二、子图"></a>二、子图</h1><h2 id="子图真子图生成子图"><a href="#子图真子图生成子图" class="headerlink" title="子图真子图生成子图"></a>子图真子图生成子图</h2><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222153942914.png"></p><h2 id="导出子图"><a href="#导出子图" class="headerlink" title="导出子图"></a>导出子图</h2><h3 id="节点集导出子图"><a href="#节点集导出子图" class="headerlink" title="节点集导出子图"></a>节点集导出子图</h3><p>设图 G &#x3D;&lt;V, E, Ψ &gt;，𝑽′是V的子集 且 𝑽′ ≠ 空集。<br>(1) 以 𝑽′为结点集合，以所有起点和终点均在𝑽′ 中的边的全体为边集合的 G 的子图，称为<strong>由𝑽′导出的G的子图，记为 G[𝑽′]<strong>。<br>(2) 若 𝑽′真包含于V，</strong>导出子图 G[V–𝑽′] 记为 G –𝑽′</strong></p><p>直观理解</p><ul><li>G[𝑽′] ：以 𝑽′ 为结点集合的<strong>最大子图</strong></li><li>G – V′：从 G 中去掉 V′ 中的结点以及与这些结点关联的所有边而得到的G的子图</li></ul><h3 id="由边集导出的子图"><a href="#由边集导出的子图" class="headerlink" title="由边集导出的子图"></a>由边集导出的子图</h3><ul><li>以 𝑽′ 为边集合的 G 的<strong>子图</strong>称为由 E′导出的子图，记为 G[𝑬′]</li></ul><h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul><li>G 的子图是 G 的一部分,也可能就是G</li><li>G 的真子图的边比 G 的边少</li><li>G 的生成子图与 G 有<strong>相同的结点</strong></li><li>G 的导出子图 G[𝑽′]是 G的以𝑽′为结点集合的<strong>最大子图</strong></li></ul><h1 id="三、图的运算"><a href="#三、图的运算" class="headerlink" title="三、图的运算"></a>三、图的运算</h1><h2 id="可运算"><a href="#可运算" class="headerlink" title="可运算"></a>可运算</h2><p>设 G＝&lt;V, E, Ψ &gt;， 𝑮′＝&lt;𝑽′, 𝑬′, 𝜳′ &gt;同为无向图或同为有向图。</p><ul><li>如果对于任意 e ∈ E∩𝑬′，均有 Ψ(e) ＝ 𝜳′(e)，则称 G 和 𝑮′是<strong>可运算</strong>的**,也就是说公共边所关联的点相同**</li><li>如果V∩𝑽′＝E∩𝑬′&#x3D;空集，则称 G 和 𝑮′是<strong>不相交的,<strong>也就是说没</strong>有公共点</strong></li><li>如果 E∩𝑬′＝ 空集，则称 G 和 𝑮′是边不相交的</li></ul><h2 id="交-并-环和"><a href="#交-并-环和" class="headerlink" title="交,并,环和"></a>交,并,环和</h2><p>设图G1＝&lt;V1, E1, Ψ1&gt;和G2＝&lt;V2, E2, Ψ2&gt; <strong>可运算</strong>,这是前提</p><h3 id="图的交"><a href="#图的交" class="headerlink" title="图的交"></a>图的交</h3><ul><li>G1∩G2 &#x3D;  &lt;V1∩V2，E1∩E2，Ψ1∩Ψ2 &gt;</li><li>也就是节点,边,对应关系的交集</li></ul><h3 id="图的并"><a href="#图的并" class="headerlink" title="图的并"></a>图的并</h3><ul><li>G1∪G2 &#x3D;  &lt;V1∪V2，E1∪E2，Ψ1∪Ψ2 &gt;</li><li>也就是节点,边,对应关系的并集</li></ul><h3 id="图的环和"><a href="#图的环和" class="headerlink" title="图的环和"></a>图的环和</h3><p>$$<br>G_1 \oplus G_2 &#x3D; &lt; V_1∪V_2，E_1\oplus E_2，(Ψ1∪Ψ2)_{E1\oplus E2} &gt;<br>$$</p><ul><li>节点集<strong>取并集</strong></li><li>边集<strong>取对称差</strong></li><li>关系根据边集变化</li></ul><h3 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a>唯一性</h3><ul><li>三种运算均具有唯一性</li></ul><h2 id="G-E’"><a href="#G-E’" class="headerlink" title="$G-E’$"></a>$G-E’$</h2><ul><li>G - E′是从 G 中去掉 E’ 中的边所得到的G的子图</li><li>&#x3D;&#x3D;与 E′中的边相关联的结点并不去掉&#x3D;&#x3D;</li></ul><h2 id="G-E’-Ψ’"><a href="#G-E’-Ψ’" class="headerlink" title="$G+E’_{Ψ’}$"></a>$G+E’_{Ψ’}$</h2><p>设图 G ＝&lt;V , E , Ψ&gt; 和 G’ ＝&lt;V , E’, Ψ’&gt;同为无向图或同为有向图，<strong>若G 和 G’ 边不相交，且 G’无孤立点</strong></p><ul><li>$G+E’_{Ψ’}$是由 G 增加 E’ 中的边所得到的图</li></ul><h2 id="补图"><a href="#补图" class="headerlink" title="补图"></a>补图</h2><p>设 n 阶无向图 G ＝ &lt; V, E , Ψ&gt; 是 <strong>n 阶完全无向图 $K_n$</strong> 的生成子图，则称 $K_n$ – E 为 G 的 补图，记为 $\overline{G}$</p><h1 id="四、路径与回路"><a href="#四、路径与回路" class="headerlink" title="四、路径与回路"></a>四、路径与回路</h1><h2 id="路径定义"><a href="#路径定义" class="headerlink" title="路径定义"></a>路径定义</h2><ul><li>$v_0 e_1 v_1 e_2 … v_{n-1} e_n v_n $为图 G 中从$ v_0 $至$v_n$ 的路径，n 称为该路径的长度</li><li>如果 $v_0 &#x3D;v_n$ ，则称该路径为<strong>闭的</strong>，否则称为<strong>开的</strong></li><li>如果各条边互不相同，则称该路径为<strong>简单的</strong></li><li>如果各个节点互不相同，则称该路径为<strong>基本的</strong></li><li>从路径中去掉闭路径，能够<strong>得到基本路径</strong></li><li>n 阶图中的<strong>基本路径的长度小于 n</strong></li></ul><p>$$<br>设图 G &#x3D; &lt;V, E, Ψ &gt; ，v,v′∈V，如果存在从 v 至v′的路径\则存在从 v 至 v′的基本路径 \tag{定理3.1}<br>$$</p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="可达"><a href="#可达" class="headerlink" title="可达"></a>可达</h3><p>若存在从 v1 至 v2 的路径，则称<strong>在G中从v1可达v2</strong>，或从v1到v2 可达； 否则称在G 中从 v1 不可达 v2 或从v1到v2 不可达。</p><p>对于图G的结点v，&#x3D;&#x3D;用 R(v) 表示从v可达的全体结点的集合&#x3D;&#x3D;。<br>$$<br>设图 G &#x3D; &lt;V, E, Ψ &gt; ，v_1,v_2∈V，从v_1可达v_2\当且仅当存在从v_1至v_2的基本路径 \tag{定理3.3}<br>$$</p><h3 id="距离与直径"><a href="#距离与直径" class="headerlink" title="距离与直径"></a>距离与直径</h3><ul><li><p>若从 v1 可达 v2，则称从 v1 至 v2 的<strong>路径中长度最短者</strong>为从 v1 至 v2 的 <strong>测地线</strong>，并称该测地线的长度为从 v1 至 v2 的<strong>距离</strong>，记作 d(v1, v2)</p></li><li><p>若从 v1 不可达 v2，则称v1 至 v2 的距离 d(v1, v2)为 ∞</p></li></ul><p>$$<br>图 G &#x3D; &lt;V, E, Ψ &gt;的直径定义为\𝒎𝒂𝒙_{v,v′∈𝑽}  d(v,v′) \tag{定义3.4}<br>$$</p><h3 id="加权图"><a href="#加权图" class="headerlink" title="加权图"></a>加权图</h3><p>设图 G &#x3D; &lt;V, E, Ψ &gt; 。若 W : E → R＋（R＋是正实数集）， 则称&lt;G，W &gt;为<strong>加权图</strong></p><ul><li>若 e∈ E ，称 W(e) 为<strong>边 e 的加权长度</strong></li><li>路径中所有边的加权⻓度之和称为该<strong>路径的加权长度</strong></li><li>从结点v⾄结点v′的路径中, 加权长度最小的称为<strong>从v⾄v′的最短路径</strong></li><li>若从v可达v′，则称从v ⾄v′的最短路径的加权⻓度为<strong>从v⾄v′的加权距离</strong></li></ul><h2 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h2><ul><li>emmm……只会算，本蒟蒻总结不好，PPT上的看不懂<span class="github-emoji" alias="innocent" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f607.png?v8">&#x1f607;</span></li></ul><h1 id="五、连通性"><a href="#五、连通性" class="headerlink" title="五、连通性"></a>五、连通性</h1><h2 id="无向图的连通性"><a href="#无向图的连通性" class="headerlink" title="无向图的连通性"></a>无向图的连通性</h2><ul><li>如果无向图 G 的<strong>任意两个结点都互相可达</strong>，则称<strong>G是连通</strong>的；否则称G是非连通的</li><li>无向图 G &#x3D; &lt;V, E, Ψ &gt;是连通的 当且仅当对于<strong>任意v∈V , 皆有 R(v) ＝ V</strong></li></ul><h3 id="连通分支"><a href="#连通分支" class="headerlink" title="连通分支"></a>连通分支</h3><ul><li>设G′是图G的具有某性质 P 的子图，并且对于G的具有该性质的任意子图 G″，只要G′包含于G″就有 G′＝ G″，则称 G′相对于该性质是 G 的&#x3D;&#x3D;极大子图&#x3D;&#x3D;</li><li>&#x3D;&#x3D;无向图G的极大的连通子图称为G 的连通分支，简称分支&#x3D;&#x3D;</li><li>&#x3D;&#x3D;连通无向图恰有一个分支&#x3D;&#x3D;</li><li>&#x3D;&#x3D;非连通无向图的分支多于一个&#x3D;&#x3D;</li></ul><h2 id="有向图的连通性"><a href="#有向图的连通性" class="headerlink" title="有向图的连通性"></a>有向图的连通性</h2><h3 id="基础图"><a href="#基础图" class="headerlink" title="基础图"></a>基础图</h3><p>设有向图 G &#x3D; &lt;V, E, Ψ &gt; ， 如下定义𝜳′：E → { {v1, v2} |v1∈V ∧ v2∈V } ，使得，对任意 e ∈E 和 v1, v2∈V，若 Ψ(e) ＝&lt; v1, v2 &gt;，则 𝜳′(e)＝{v1, v2}。称无向图 𝑮′ &#x3D; &lt;V, E, 𝜳′ &gt;为有向图 G 的<strong>基础图</strong></p><h3 id="三种连通性"><a href="#三种连通性" class="headerlink" title="三种连通性"></a>三种连通性</h3><p>设G是有向图</p><ul><li>如果G中任意两个结点都互相可达，则称G是<strong>强连通</strong>的</li><li>如果对于G的任意两结点，必有一个结点可达另一结点， 则称 G 是<strong>单向连通</strong>的</li><li>&#x3D;&#x3D;如果 G 的基础图是连通的&#x3D;&#x3D;，则称 G 是<strong>弱连通</strong>的</li></ul><h3 id="三种分支"><a href="#三种分支" class="headerlink" title="三种分支"></a>三种分支</h3><p>设G是有向图</p><ul><li>G 的&#x3D;&#x3D;极大强连通子图&#x3D;&#x3D;称为 G 的<strong>强（连通）分支</strong></li><li>G 的&#x3D;&#x3D;极大单向连通子图&#x3D;&#x3D;称为 G 的<strong>单向分支</strong></li><li>G 的&#x3D;&#x3D;极大弱连通子图&#x3D;&#x3D;称为 G 的<strong>弱分支</strong></li></ul><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222205605436.png"></p><ul><li>强连通（单向连通，弱连通）有向图<strong>恰有一个</strong>强分支（单向分支，弱分支）</li><li>非强连通（非单向连通，非弱连通）有向图<strong>有一个以上</strong>强分支（单向分支，弱分支）</li></ul><h1 id="六、回路、半回路、有向回路"><a href="#六、回路、半回路、有向回路" class="headerlink" title="六、回路、半回路、有向回路"></a>六、回路、半回路、有向回路</h1><h2 id="半路径"><a href="#半路径" class="headerlink" title="半路径"></a>半路径</h2><ul><li><p>设 G′是有向图 G＝ &lt;V, E, Ψ &gt;的&#x3D;&#x3D;基础图，G′中的路径称为 G 中的半路径&#x3D;&#x3D;</p></li><li><p>设 $v_0e_1v_1…v_{m-1}e_mv_m$是G中的半路径。对每个i (1≤i≤m)，</p><ul><li>如果Ψ($e_i)&#x3D;&lt;v_{i-1}, v_i&gt;$，则称 $e_i$ 是该半路径中的<strong>正向边</strong></li><li>如果Ψ($e_i)&#x3D;&lt;v_i, v_{i-1}&gt;$，则称 $e_i$ 是该半路径中的<strong>反向边</strong></li></ul></li><li><p>有向图中的半路径是路径&#x3D;&#x3D;当且仅当该半路径中的边都是正向边&#x3D;&#x3D;</p></li></ul><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul><li>&#x3D;&#x3D;连通2度正则图称为回路&#x3D;&#x3D;</li></ul><blockquote><p>[!NOTE]</p><p>&#x3D;&#x3D;回路的节点的度一定为2&#x3D;&#x3D;</p></blockquote><ul><li>&#x3D;&#x3D;基础图是回路的有向图称为半回路&#x3D;&#x3D;</li><li>&#x3D;&#x3D;每个结点的出度和入度均为 1 的弱连通有向图称为有向回路&#x3D;&#x3D;</li><li>回路 (半回路，有向回路)边的数目称为<strong>回路</strong> (半回路，有向回路)<strong>的长度</strong></li></ul><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222210745378.png"></p><hr><p>&#x3D;&#x3D;定理3.6&#x3D;&#x3D; </p><p>设 v 是图G的任意结点，<strong>G是回路</strong>（或有向回路），当且仅当<br>(1) G的<strong>阶与边数相等</strong>，且<br>(2) 在G中存在一条 v到v的闭路径，使得<strong>除了v在该闭路径中出现两次外，其余结点和每条边都在该闭路中恰出现一次</strong></p><h2 id="有回路，非循环图"><a href="#有回路，非循环图" class="headerlink" title="有回路，非循环图"></a>有回路，非循环图</h2><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><ul><li>如果回路 (有向回路，半回路) C 是图 G的子图，则称 G <strong>有回路</strong> (有向回路，半回路) C</li><li>&#x3D;&#x3D;没有回路的无向图和没有半回路的有向图称为非循环图&#x3D;&#x3D;</li></ul><h4 id="有向回路判断"><a href="#有向回路判断" class="headerlink" title="有向回路判断"></a>有向回路判断</h4><ul><li>如果有向图 G 有子图 G′，使得 对于 G′的任意结点 v，皆有 $𝒅_{𝑮’}^+ (v) 或𝒅_{𝑮’}^- (v)&gt; 0$，则 G 有有向回路</li><li>从G中去掉 v 和与之关联的边得到有向图 G-{v}的过程称为&#x3D;&#x3D;W-过程&#x3D;&#x3D;<ul><li><strong>G 有有向回路当且仅当 G – {v} 有有向回路</strong></li><li>若 n 阶有向图 G <strong>没有有向回路</strong>，则经过 n–1 次W-过程得到<strong>平凡图</strong></li></ul></li></ul><h4 id="非循环图的判断"><a href="#非循环图的判断" class="headerlink" title="非循环图的判断"></a>非循环图的判断</h4><ul><li>图 G 不是非循环图当且仅当 G 有子图 G′，使得对<strong>于G′ 的任意结点 v，皆有 $d_G′(v) $&gt; 1</strong></li></ul><h1 id="七、连通性的强与弱"><a href="#七、连通性的强与弱" class="headerlink" title="七、连通性的强与弱"></a>七、连通性的强与弱</h1><h2 id="连通度"><a href="#连通度" class="headerlink" title="连通度"></a>连通度</h2><ul><li>点连通度：为了<strong>破坏连通性</strong>，至少需要删除多少个顶点？</li><li>边连通度：为了<strong>破坏连通性</strong>，至少需要删除多少条边？</li></ul><h2 id="点割集"><a href="#点割集" class="headerlink" title="点割集"></a>点割集</h2><p>设无向图G&#x3D; &lt;V, E, Ψ &gt;为连通图，若有非空点集V1真包含于V,</p><p>使图G删除了V1的所有结点后，所得的子图是不连通图</p><p>而删除了V1的任意真⼦集后，所得到的子图仍是连通图，则称&#x3D;&#x3D;V1是G的⼀个点割集&#x3D;&#x3D;</p><ul><li><p>&#x3D;&#x3D;点割集具有极小性&#x3D;&#x3D;</p></li><li><p>若某⼀个结点构成⼀个点割集，则称该结点为<strong>割点</strong></p></li></ul><h2 id="图的连通度"><a href="#图的连通度" class="headerlink" title="图的连通度"></a>图的连通度</h2><ul><li>设G是⽆向图，k(G) &#x3D; <strong>min</strong>{ |V1| | V1是 G 的点割集 }是<strong>G的点连通度</strong>，也称作连通度</li><li>&#x3D;&#x3D;连通度k(G)表示为了产生⼀个不连通图所需要删除的点的最少数目&#x3D;&#x3D;</li><li><strong>非连通图的连通度等于0，存在割点的连通图的连通度为1，n阶完全图的连通度为n-1</strong></li><li>连通度k(G)表示图G的连通程度， <strong>k(G)大表示连通性强</strong>，即需要删除更多的点才能使图从连通变为非连通</li></ul><h2 id="边割集"><a href="#边割集" class="headerlink" title="边割集"></a>边割集</h2><p>&#x3D;&#x3D;大同小异，懒得敲了&#x3D;&#x3D;</p><ul><li>边割集</li><li>割边</li><li>边连通度</li></ul><h2 id="充要条件"><a href="#充要条件" class="headerlink" title="充要条件"></a>充要条件</h2><ul><li>一个连通无向图G中的结点v是割点 $\Leftrightarrow$ 存在结点u和w，使得连接u和w的<strong>每条路都经过v</strong></li><li>一个连通无向图G中的边e是割边 $\Leftrightarrow$ 存在结点u和w，使得连接u和w的<strong>每条路都经过e</strong></li></ul><h1 id="八、欧拉图"><a href="#八、欧拉图" class="headerlink" title="八、欧拉图"></a>八、欧拉图</h1><h2 id="欧拉路径"><a href="#欧拉路径" class="headerlink" title="欧拉路径"></a>欧拉路径</h2><ul><li>图G中包含其<strong>所有边的简单开路径</strong>称为 G 的<strong>欧拉路径</strong></li><li>图G中包含其<strong>所有边的简单闭路径</strong>称为 G 的<strong>欧拉闭路</strong></li></ul><h2 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h2><ul><li>&#x3D;&#x3D;每个结点都是偶结点的无向图称为欧拉图&#x3D;&#x3D;</li><li><strong>每个结点的出度和入度都相等的有向图称为欧拉有向图</strong></li></ul><h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><ul><li>&#x3D;&#x3D;设 G 是连通无向图，G是欧拉图当且仅当G有欧拉闭路&#x3D;&#x3D;</li><li>&#x3D;&#x3D;设 G 为弱连通的有向图。G 是欧拉有向图当且仅当 G有欧拉闭路&#x3D;&#x3D;</li></ul><h2 id="欧拉路径判断"><a href="#欧拉路径判断" class="headerlink" title="欧拉路径判断"></a>欧拉路径判断</h2><ul><li>设 G ＝&lt;V, E, Ψ&gt; 为 <strong>连通无向图</strong> ， v1，v2∈V 且v1 !&#x3D; v2 。则G 有一条从 v1 至 v2 的欧拉路径当且仅当 G <strong>恰</strong><br><strong>有两个奇结点 v1 和 v2</strong></li><li>设G为<strong>弱连通有向图</strong>。v1 和v2为G的两个不同结点，G有一条从 v1 至 v2 的欧拉路径 当且仅当$𝒅_𝑮^+ (v_1) &#x3D; 𝒅_𝑮^- (v_1) + 1，𝒅_𝑮^+ (v_2) &#x3D; 𝒅_𝑮^- (v_2) - 1$,且<strong>对其他节点，二者相等</strong></li></ul><hr><ul><li>如果 G1 和 G2是可运算欧拉图，则G1$\oplus$G2 是欧拉图</li></ul><h1 id="九、哈密顿图"><a href="#九、哈密顿图" class="headerlink" title="九、哈密顿图"></a>九、哈密顿图</h1><h2 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h2><ul><li>如果&#x3D;&#x3D;回路 (有向回路) C 是图 G 的生成子图&#x3D;&#x3D;，则称 C 为 G的<strong>哈密顿回路</strong>（哈密顿有向回路）</li><li>图G中&#x3D;&#x3D;包含它的所有结点的基本路径&#x3D;&#x3D;称为G的<strong>哈密顿路径</strong></li><li>有<strong>哈密顿回路（哈密顿有向回路）的图称为哈密顿图</strong>（哈密顿有向图）</li></ul><h2 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h2><p><strong>用黑白两种颜色 给图中的点着色，使相邻点的颜色不同</strong></p><ul><li>G有<strong>哈密顿回路</strong>，则G中白色结点与黑色结点个<strong>数一定相等</strong></li><li>G有<strong>哈密顿路径</strong>，则G中白色结点与黑色结点<strong>个数相等或相差1</strong></li><li>设G&#x3D;&lt;V, E,𝚿&gt;是哈密顿图，则对V的任意非空真子集 V1 有 **W(G-V1) &lt;&#x3D;|V1|**，其中W(G-V1)为G-V1的分支的个数</li></ul><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222225541407.png"></p><h2 id="充分条件"><a href="#充分条件" class="headerlink" title="充分条件"></a>充分条件</h2><ul><li>哈密尔顿图<strong>一定不存在悬挂边</strong>，至多存在哈密尔顿路径</li><li>哈密尔顿图中<strong>不存在孤立顶点</strong></li><li>n≥2时，$K_n$是哈密尔顿图，$K_n$表示n阶完全图</li><li>只要图G中有足够多边，那么图就是哈密尔顿图</li><li>假设G是一个n（n≥3）阶简单图，如果G中<strong>任意顶点的度都至少是n&#x2F;2</strong>，则G是<strong>哈密尔顿图</strong>（狄拉克定理）</li><li>假设G是一个n（n≥2）阶简单图，如果G中任意一对顶点u和v，都满足$d_G(u) + d_G(v)$ <strong>≥ n-1</strong>,则G中存在<strong>哈密尔顿路径</strong>(欧尔定理）</li></ul><h1 id="十、图的矩阵表示"><a href="#十、图的矩阵表示" class="headerlink" title="十、图的矩阵表示"></a>十、图的矩阵表示</h1><h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222232218599.png"></p><ul><li>如果G2和G2是两个<strong>同构的图</strong>，则首先交换X(G1)的一些行，然后交换相应的列，就可由X(G1)得到X(G2)</li></ul><h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ul><li><strong>无向图</strong>G的邻接矩阵 X(G) 是<strong>对称的</strong></li><li>图 G <strong>没有平行边</strong> ⟺ X(G)的<strong>元素都是0和1</strong></li><li>图G有<strong>自圈</strong> ⟺ X(G)的<strong>对角线有非零元素</strong></li><li>图G是<strong>简单图</strong> ⟺ X(G)的元素都是0和1,并且对角线元素都为0</li><li>图G是<strong>零图</strong> ⟺ X(G)是<strong>零矩阵</strong> (即所有元素都是0的矩阵)</li><li>若图G是<strong>无向图</strong>，$d_G(v_i) &#x3D; x_{ii} + \sum_{j&#x3D;1}^n x_{ij}$</li><li>若图G是<strong>有向图</strong>， $d^+<em>G(v_i) &#x3D; \sum</em>{j&#x3D;1}^n x_{ij},d^-<em>G(v_i) &#x3D; \sum</em>{j&#x3D;1}^n x_{ji},d_G(v_i) &#x3D; \sum_{j&#x3D;1}^n (x_{ij}+x_{ji})$</li></ul><h3 id="幂"><a href="#幂" class="headerlink" title="幂"></a>幂</h3><ul><li>对于矩阵 X，m∈N，令 &#x3D;&#x3D;$x_{ij}^m$ 表示 $X^m$ 的第 i 行第 j 列元素&#x3D;&#x3D;</li><li>n 在 X(G) 中，若 $x_{ij}$ &#x3D; r，则<strong>说明从 vi 至 vj 存在 r 条长度为 1 的路径</strong></li><li>设 m∈I+，n 阶图G的 V &#x3D; {v1, v2, …, vn}，若 X是G的邻接矩阵且1 ≤ i, j ≤ n，则&#x3D;&#x3D;$x_{ij}^m$ 等于 G 中从 vi 至 vj的长度为 m 的路径数目&#x3D;&#x3D;</li></ul><h2 id="可达性矩阵"><a href="#可达性矩阵" class="headerlink" title="可达性矩阵"></a>可达性矩阵</h2><h3 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h3><p>设 n 阶图 G 的全部结点为 $v_1, v_2，…, v_n$ ，定义图G的路径矩阵为 n×n 矩阵 P ＝($p_{ij}$)，其中$p_{ij}$&#x3D;1,从$v_i可达v_j$,为0则不可达<br><strong>路径矩阵也称为可达性矩阵</strong></p><h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222234157701.png"></p><p><img src="C:\Users\pengg\AppData\Roaming\Typora\typora-user-images\image-20241222234243298.png"></p><ul><li>&#x3D;&#x3D;其实也就是求出G的各阶矩阵，再或一下&#x3D;&#x3D;</li></ul><h2 id="距离矩阵"><a href="#距离矩阵" class="headerlink" title="距离矩阵"></a>距离矩阵</h2><h3 id="定义-6"><a href="#定义-6" class="headerlink" title="定义"></a>定义</h3><ul><li><p>设 n 阶图 G 的全部结点为 $v_1, v_2，…, v_n$ ,称n×n 矩阵 D ＝($d_{ij}$)为G的<strong>距离矩阵</strong>，其中$d_{ij}$表示vi到vj的距离</p></li><li><p>如果vi到vj不连通，则为$\infty$</p></li></ul><h2 id="关联矩阵"><a href="#关联矩阵" class="headerlink" title="关联矩阵"></a>关联矩阵</h2><h3 id="定义-7"><a href="#定义-7" class="headerlink" title="定义"></a>定义</h3><ul><li>设<strong>无自圈的无向图</strong> G 的结点集和边集分别为${v_1, v_2, …, v_n}$ 和${e_1, e_2, …, e_m}$ ，定义 G 的关联矩阵 A(G)为 n×m 矩阵($a_{ij}$)，&#x3D;&#x3D;其中$a_{ij}$&#x3D;1,if $e_j和v_i$关联，若不关联则为0&#x3D;&#x3D;</li><li><strong>无自圈的有向图</strong>，&#x3D;&#x3D;其中$a_{ij}$&#x3D;1,if $v_i$是$e_j$起点，其中$a_{ij}$&#x3D; -1,if $v_i$是$e_j$终点，不关联则为0&#x3D;&#x3D;</li></ul><h3 id="联系"><a href="#联系" class="headerlink" title="联系"></a>联系</h3><ul><li>G是<strong>零图</strong> ⇔ A(G) 是空矩阵 (即没有任何元素的矩阵</li><li><strong>无向图</strong> G 的关联矩阵 A(G) 的每列元素之和为 2(每条边过2个结点)</li><li><strong>有向图</strong> G 的关联矩阵 A(G) 的每列元素之和为 0</li><li>ei 和 ej 是 G 的<strong>平行边</strong> ⇔ A(G)的第 i 列与第 j 列相同</li><li>若G是无向图，则 $d_G(v_i) &#x3D; \sum_{j&#x3D;1}^m a_{ij}$ ( i &#x3D; 1，2，…，n )</li><li>若G是有向图， ( i &#x3D; 1, 2, …, n ):<ul><li>$d^+_G(v_i)$为 A(G) 的第 i 行中<strong>值为 1</strong> 的元素个数</li><li>$d^-_G(v_i)$为 A(G) 的第 i 行中<strong>值为 −1</strong> 的元素个数</li><li>$d_G(v_i)$为 A(G) 的第 i 行中 <strong>非零</strong> 元素个数</li></ul></li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li><strong>图的路径矩阵和距离矩阵不能给出图的全部信息</strong></li><li>&#x3D;&#x3D;图的邻接矩阵可以给出图的全部信息&#x3D;&#x3D;</li><li><strong>无自圈图的关联矩阵可以给出无自圈图的全部信息</strong></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>离散</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>离散</tag>
+      
+      <tag>复习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>北航计组-P7课下</title>
+    <link href="/2024/12/15/P7%E8%AF%BE%E4%B8%8B/"/>
+    <url>/2024/12/15/P7%E8%AF%BE%E4%B8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>怎么会有这么笨的人啊啊啊啊啊<span class="github-emoji" alias="sob" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8">&#x1f62d;</span></p><p>弱测通过后，de了一天中测bug，最后中测通过了，但是弱测的代码没有更新</p><p>这也就导致我课上用的是最开始的那版代码，甚至连冒险测试都过不去，但此时的我<strong>浑然不知</strong>，依然用瞪眼法debug，最后遗憾离场，回来测试了半天，没啥问题，找不出bug后，我彻底慌了，后面又打开提交记录，才发现弱测提交通过后就没再更新了,寄！<span class="github-emoji" alias="innocent" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f607.png?v8">&#x1f607;</span></p><p>白白浪费掉一次上机机会，甚至不知道课下到底有无bug，总共机会也就只有一次了，此时的我，很难受，心里很不是滋味……</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CO</category>
+      
+      <category>实验</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CO</tag>
+      
+      <tag>CPU</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>北航计组-P6课下</title>
     <link href="/2024/12/02/P6%E8%AF%BE%E4%B8%8B/"/>
     <url>/2024/12/02/P6%E8%AF%BE%E4%B8%8B/</url>
     
@@ -17,7 +73,7 @@
   
   
   <entry>
-    <title>P6课上</title>
+    <title>北航计组-P6课上</title>
     <link href="/2024/11/25/P6%E8%AF%BE%E4%B8%8A/"/>
     <url>/2024/11/25/P6%E8%AF%BE%E4%B8%8A/</url>
     
@@ -37,9 +93,9 @@
       
       <tag>CO</tag>
       
-      <tag>Verilog</tag>
-      
       <tag>CPU</tag>
+      
+      <tag>Verilog</tag>
       
     </tags>
     
@@ -48,7 +104,7 @@
   
   
   <entry>
-    <title>P5课上</title>
+    <title>北航计组-P5课上</title>
     <link href="/2024/11/18/P5%E8%AF%BE%E4%B8%8A/"/>
     <url>/2024/11/18/P5%E8%AF%BE%E4%B8%8A/</url>
     
@@ -68,9 +124,9 @@
       
       <tag>CO</tag>
       
-      <tag>Verilog</tag>
-      
       <tag>CPU</tag>
+      
+      <tag>Verilog</tag>
       
     </tags>
     
@@ -79,7 +135,7 @@
   
   
   <entry>
-    <title>P5课下</title>
+    <title>北航计组-P5课下</title>
     <link href="/2024/11/18/P5%E8%AF%BE%E4%B8%8B/"/>
     <url>/2024/11/18/P5%E8%AF%BE%E4%B8%8B/</url>
     
@@ -99,9 +155,9 @@
       
       <tag>CO</tag>
       
-      <tag>Verilog</tag>
-      
       <tag>CPU</tag>
+      
+      <tag>Verilog</tag>
       
     </tags>
     
@@ -110,7 +166,7 @@
   
   
   <entry>
-    <title>P4课上</title>
+    <title>北航计组-P4课上</title>
     <link href="/2024/11/11/P4%E8%AF%BE%E4%B8%8A/"/>
     <url>/2024/11/11/P4%E8%AF%BE%E4%B8%8A/</url>
     
@@ -130,9 +186,9 @@
       
       <tag>CO</tag>
       
-      <tag>Verilog</tag>
-      
       <tag>CPU</tag>
+      
+      <tag>Verilog</tag>
       
     </tags>
     
@@ -141,7 +197,7 @@
   
   
   <entry>
-    <title>P4课下</title>
+    <title>北航计组-P4课下</title>
     <link href="/2024/11/11/P4%E8%AF%BE%E4%B8%8B/"/>
     <url>/2024/11/11/P4%E8%AF%BE%E4%B8%8B/</url>
     
@@ -170,7 +226,7 @@
   
   
   <entry>
-    <title>OOpre课程总结</title>
+    <title>BUAA-OOpre课程总结</title>
     <link href="/2024/11/09/OOpre%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/"/>
     <url>/2024/11/09/OOpre%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/</url>
     
@@ -197,7 +253,7 @@
   
   
   <entry>
-    <title>P3课上易错点</title>
+    <title>北航计组-P3课上易错点</title>
     <link href="/2024/11/04/P3%E8%AF%BE%E4%B8%8A%E6%8A%80%E5%B7%A7/"/>
     <url>/2024/11/04/P3%E8%AF%BE%E4%B8%8A%E6%8A%80%E5%B7%A7/</url>
     
@@ -228,7 +284,7 @@
   
   
   <entry>
-    <title>P3课下</title>
+    <title>北航计组-P3课下</title>
     <link href="/2024/11/04/P3%E8%AF%BE%E4%B8%8B/"/>
     <url>/2024/11/04/P3%E8%AF%BE%E4%B8%8B/</url>
     
@@ -257,7 +313,7 @@
   
   
   <entry>
-    <title>P3课上</title>
+    <title>北航计组-P3课上</title>
     <link href="/2024/11/01/P3%E8%AF%BE%E4%B8%8A/"/>
     <url>/2024/11/01/P3%E8%AF%BE%E4%B8%8A/</url>
     
@@ -288,7 +344,7 @@
   
   
   <entry>
-    <title>P2课上</title>
+    <title>北航计组-P2课上</title>
     <link href="/2024/10/22/P2%E8%AF%BE%E4%B8%8A/"/>
     <url>/2024/10/22/P2%E8%AF%BE%E4%B8%8A/</url>
     
@@ -333,9 +389,9 @@
     
     <tags>
       
-      <tag>物理</tag>
-      
       <tag>复习</tag>
+      
+      <tag>物理</tag>
       
     </tags>
     
@@ -344,7 +400,7 @@
   
   
   <entry>
-    <title>P1课下</title>
+    <title>北航计组-P1课下</title>
     <link href="/2024/10/06/P1%E8%AF%BE%E4%B8%8B/"/>
     <url>/2024/10/06/P1%E8%AF%BE%E4%B8%8B/</url>
     
