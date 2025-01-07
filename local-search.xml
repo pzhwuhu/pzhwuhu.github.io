@@ -8,7 +8,7 @@
     <link href="/2024/12/22/%E5%9B%BE%E8%AE%BA%E5%A4%8D%E4%B9%A0/"/>
     <url>/2024/12/22/%E5%9B%BE%E8%AE%BA%E5%A4%8D%E4%B9%A0/</url>
     
-    <content type="html"><![CDATA[<p>因为博客本身的渲染引擎对于许多latex公式很不友好，所以索性将导出的pdf上传了，希望大家有所收获<span class="github-emoji" alias="smiley" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">&#x1f603;</span><br><a href="https://pzhwuhu.github.io/Notes/%E5%9B%BE%E8%AE%BA%E5%A4%8D%E4%B9%A0.pdf">pdf链接点这里</a></p>]]></content>
+    <content type="html"><![CDATA[<p>因为博客本身的渲染引擎对于许多latex公式很不友好，所以索性将导出的pdf上传了，希望大家有所收获<span class="github-emoji" alias="smiley" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">&#x1f603;</span></p><p>有两个版本，，一个浅色，一个深色，但是深色的里面插入的图片还是浅色的，这没办法，将就下吧，hhh<br><a href="https://pzhwuhu.github.io/Notes/%E5%9B%BE%E8%AE%BA%E5%A4%8D%E4%B9%A0-%E6%B7%B1%E8%89%B2.pdf">深色pdf链接点这里</a></p><p><a href="https://pzhwuhu.github.io/Notes/%E5%9B%BE%E8%AE%BA%E5%A4%8D%E4%B9%A0-%E6%B5%85%E8%89%B2.pdf">浅色pdf链接点这里</a></p>]]></content>
     
     
     <categories>
@@ -20,9 +20,9 @@
     
     <tags>
       
-      <tag>离散</tag>
-      
       <tag>复习</tag>
+      
+      <tag>离散</tag>
       
     </tags>
     
@@ -389,9 +389,9 @@
     
     <tags>
       
-      <tag>复习</tag>
-      
       <tag>物理</tag>
+      
+      <tag>复习</tag>
       
     </tags>
     
