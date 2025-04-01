@@ -28,10 +28,10 @@ http://pzhwuhu.github.io/tags/%E6%80%BB%E7%BB%93/
 http://pzhwuhu.github.io/tags/OO/
 http://pzhwuhu.github.io/tags/Java/
 http://pzhwuhu.github.io/tags/CO/
+http://pzhwuhu.github.io/tags/Verilog/
 http://pzhwuhu.github.io/tags/mips/
 http://pzhwuhu.github.io/tags/Logisim/
 http://pzhwuhu.github.io/tags/CPU/
-http://pzhwuhu.github.io/tags/Verilog/
 http://pzhwuhu.github.io/tags/%E5%8D%9A%E5%AE%A2/
 http://pzhwuhu.github.io/tags/%E9%85%8D%E7%BD%AE/
 http://pzhwuhu.github.io/tags/%E7%A6%BB%E6%95%A3/
