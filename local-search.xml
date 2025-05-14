@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>BUAA-OO-Unit3</title>
+    <link href="/2025/05/14/OO-Unit3/"/>
+    <url>/2025/05/14/OO-Unit3/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-info">            <p>这是2025年北航OO第三单元的总结博客，希望能对你有所帮助😊</p>          </div><h1 id="各种测试"><a href="#各种测试" class="headerlink" title="各种测试"></a>各种测试</h1><ul><li>作业要求，这里就不说了😆</li></ul><h1 id="测试数据构造"><a href="#测试数据构造" class="headerlink" title="测试数据构造"></a>测试数据构造</h1><blockquote><p><strong>未测代码永远是错的</strong>  ——jyy</p></blockquote><ul><li><p>&#x3D;&#x3D;以hw10数据生成器为例&#x3D;&#x3D;</p></li><li><p>在我的测试数据生成器<code>generator.py</code>中，设计了几种测试场景，分别测试<strong>不同的输入模式与程序功能</strong>，主要测试几个需要<strong>动态维护</strong>的属性相关的指令</p></li><li><p>由于通过了中测，所以大部分的基本指令单独的功能是没有问题的，因此我设计了几种设计模式来重点测试<code>qba</code>、<code>qtvs</code>以及<strong>公众号、文章相关的指令</strong></p></li><li><p>采用随机策略+指定概率来生成</p></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">mode_probabilities = &#123;<br>    <span class="hljs-string">&#x27;normal_data&#x27;</span>: <span class="hljs-number">0.05</span>,<br>        <span class="hljs-string">&#x27;stress_test_data&#x27;</span>: <span class="hljs-number">0.1</span>,                                        <br>        <span class="hljs-string">&#x27;special_qtvs&#x27;</span>: <span class="hljs-number">0.3</span>,                        <br>        <span class="hljs-string">&#x27;structured_social_media_test&#x27;</span>: <span class="hljs-number">0.25</span>,      <br>        <span class="hljs-string">&#x27;special_qba_stress_test&#x27;</span>: <span class="hljs-number">0.3</span>         <br>    &#125;<br></code></pre></td></tr></table></figure><ul><li>总共5种模式<ul><li><code>normal_data</code>：常规测试数据，添加用户、标签、公众号后，剩余的指令随机生成</li><li><code>stress_test_data</code>：在常规测试的基础上，增大数据量，同时会先随机设置关系值，然后随机生成指令</li><li><code>special_qtvs</code>：专门针对<code>qtvs</code>的生成模式。首先创建用户，接着建立所有其他人与1号人物的关系，并随机添加一些关系，然后全部加入1号人物的标签中，然后分2阶段测试，第一阶段在网络中随机修改关系，添加关系，查询qtvs；第二阶段大致与第一阶段类似，但添加了指令<code>dft</code>，以及增加了<code>qtvs</code> 的概率。</li><li><code>special_qba_stress_test</code>：专门针对<code>qba</code>的测试。首先建立一个总人数20%的核心用户群，然后在核心用户中每个用户随机添加2-3个关系，然后开始第二阶段，混合测试：40%概率执行qba查询，并且80%概率查询核心用户，20%概率查询其他用户；30%概率新增或修改核心用户与其他用户之间的关系；30%概率新增用户和关系值，其中一半概率新增用户并添加关系，一半概率在所有用户中随机添加关系</li><li><code>structured_social_media_test</code>：第一阶段：添加用户和关系；第二阶段：添加公众号，并添加少量关注和文章；第三阶段：海量的数据来随机进行以下几种操作：贡献文章、删除文章、添加关注、删除公众号、查询接受文章、查询最佳贡献者</li></ul></li><li>😁现在回头看，还是有很多可以完善的地方 qwq</li></ul><h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><ul><li>jml的架构已经很好了，<del>跟着无脑实现就可以了</del></li></ul><h1 id="维护策略"><a href="#维护策略" class="headerlink" title="维护策略"></a>维护策略</h1><h2 id="query-shortest-path"><a href="#query-shortest-path" class="headerlink" title="query_shortest_path"></a>query_shortest_path</h2><ul><li>这个不太好维护，我是直接计算的，时间复杂度也不会超</li><li>可以采用的方法比较多：Dijkstra、BFS、双向BFS，可以选择自己喜欢的</li></ul><h2 id="query-best-contributor"><a href="#query-best-contributor" class="headerlink" title="query_best_contributor"></a>query_best_contributor</h2><ul><li>直接算，一层循环就可以</li></ul><h2 id="query-triple-sum"><a href="#query-triple-sum" class="headerlink" title="query_triple_sum"></a>query_triple_sum</h2><ul><li>这个是可以动态维护的，只需要考虑下面这几点</li><li>写一个<strong>计算共同好友数量</strong>的方法<code>private int countCommonNeighbors(Person p1, Person p2)</code></li><li>每次添加关系时，<code>triple_sum</code>加上<code>countCommonNeighbors</code>返回值</li><li>每次删除关系时，减去方法返回值即可</li></ul><h2 id="query-best-acquaintance"><a href="#query-best-acquaintance" class="headerlink" title="query_best_acquaintance"></a>query_best_acquaintance</h2><ul><li>动态维护的，而且后面的<code>query_couple_sum</code>依赖这个方法，所以这个方法最好要优一点，不然后面的方法可能要寄</li><li>在Person中添加<code>int bestAcquaintance, bestValue</code>和<code>bestDirty</code>这三个属性</li><li>朴素遍历实现一个<code>public void reSetBestAcquaintance()</code>方法</li><li>添加关系时直接与目前的最值比较，然后维护</li><li>删除关系时，如果删除的是<code>bestAcquaintance</code>，那么置位<code>bestDirty</code></li><li>修改关系时，有这么一些情况<ul><li>如果修改的就是<code>bestAcquaintance</code>，如果是把value改大了，那么直接维护<code>bestValue</code>即可；如果是value改小了，那么置位<code>bestDirty</code></li><li>如果修改的不是最好的，那么只需要在<code>newValue</code>大于现在的<code>bestValue</code>或者二者相等但id更小的时候维护<code>bestAcquaintance 和 bestValue</code></li></ul></li><li>查询时，如果<code>bestDirty</code>置位了，那么调用<code>reSetBestAcquaintance()</code>方法更新，否则直接返回即可</li></ul><h2 id="query-couple-sum"><a href="#query-couple-sum" class="headerlink" title="query_couple_sum"></a>query_couple_sum</h2><ul><li>没想好怎么维护，比较麻烦。直接计算，一层循环就可以解决</li><li>遍历每个人p1,然后得到p1的最好朋友p2，如果p2的最好朋友也是p1，那么<code>num++</code></li><li>由于每一对算了2遍，所以最后<code>return num / 2;</code></li></ul><h2 id="query-tag-age-var"><a href="#query-tag-age-var" class="headerlink" title="query_tag_age_var"></a>query_tag_age_var</h2><ul><li>参考的是<code>hyggge</code>的博客，<a href="https://hyggge.github.io/2022/06/04/oo/oo-di-san-dan-yuan-zong-jie/">链接在这里</a></li><li>有一个小坑点，学长已经说的很详细了</li></ul><h2 id="query-tag-value-sum"><a href="#query-tag-value-sum" class="headerlink" title="query_tag_value_sum"></a>query_tag_value_sum</h2><ul><li>动态维护试了很久，最后放弃了 qwq，用了一个阉割版的动态维护</li><li><code>Tag</code>里的<code>addPerson</code>和<code>delPerson</code>方法中，遍历一遍person，如果与这个要添加、删除的人有关联，就将<code>valueSum</code> 加上或减去二者关系值的2倍，<strong>一定注意是 2 倍</strong>，看看jml应该就能知道</li><li><code>Network</code>中添加关系、修改关系时，遍历全局所有tag,如果同时包含这两个人，就将tag的<code>dirty</code>置位</li><li>查询时，如果<code>dirty</code>，就重新算一遍，否则直接返回</li><li>重新算的方法也有讲究，肯定不能直接用<code>jml</code>的双层全遍历，我们可以发现，在我们的关系网中，两个人之间的value一定是相等的，那么在遍历时，第二层循环就可以直接从<code>i + 1</code>开始，不算重复的，最后返回 sum * 2即可</li></ul><h2 id="query-received-articles"><a href="#query-received-articles" class="headerlink" title="query_received_articles"></a>query_received_articles</h2><ul><li>主要是维护这个<code>received_articles</code>这个数据结构，用链表实现的话，头部插入没问题，但是删除的话，需要遍历链表；用hashmap的话并没有办法实现顺序、头部插入这些操作，于是我便自行设计了一个类，<code>LinkedMap</code>，在类中用hashmap存下<index-object>索引对，然后主体使用链表，这样在删除时，直接根据索引得到目标Object,再设置它的<code>prev</code> <code>next</code>指针即可，这样便实现了<strong>头部插入和删除均为O(1)的复杂度</strong></li><li>但是在hw11中，比较变态的是articles可以重复，也就是一个人可以有多篇id一致的<code>received_articles</code>，这样我们要修改我们的自制类，将HashMap的value替换为一个list即可，如果不太明白可以去看看我的源代码，<code>MultiLinkedMap.java</code>这个类</li></ul><h1 id="大模型"><a href="#大模型" class="headerlink" title="大模型"></a>大模型</h1><ul><li><p>使用大模型，关键在于<code>prompt</code>，一个好的<code>prompt</code>往往能达到意想不到的效果，同时要提供较为<strong>详细充足的上下文环境</strong>，<code>exp_6</code>实验提供了一个不错的借鉴</p></li><li><p>在使用的时候，让大模型根据<code>jml</code>先实现个大概，避免一些重复机械的动作，比如：异常识别与抛出，简单方法的实现等</p></li><li><p>然后可以新开一个话题或者换一个模型，一次将一个或者几个方法的jml描述投喂进去，然后让它一行一行分析解释这些jml，然后你就可以对照着它的分析，检查代码的正确性了</p></li><li><p>最后还是要自己走查几遍，多做测试</p></li><li><p>当然，模型的选择也是重要的一环，我自己体验过的：<code>Gemini 2.5 Pro</code> <code>Grok</code> <code>deepseek r1 / v3</code>都很优秀，<code>claude 3.7</code>更是无需多言，只不过用不起😭</p></li></ul><h1 id="Junit-测试"><a href="#Junit-测试" class="headerlink" title="Junit 测试"></a>Junit 测试</h1><ul><li>需要我们构造数据足够全面，覆盖各种测试场景</li><li>同时，在检验正确性时候，需要检查<code>ensures</code> <code>assignable</code> <code>pure</code> <code>safe</code> <code>result</code>等种种条件是否被正确实现，需要比较细致全面的检查，也给同学们带来较大的麻烦</li><li>为了测试不能更改的属性前后是否一致，我选择在生成测试数据时，就生成两份一模一样的，一份调用方法，另一份作为对拍</li><li>（超小声）可以借鉴学长的代码，在此基础上修改以适应自己的架构，应该能省一些事儿🫠</li></ul><h1 id="学习体会"><a href="#学习体会" class="headerlink" title="学习体会"></a>学习体会</h1><ul><li>jml确实提供了一个优良的编码指导和架构设计，使得这单元的作业能省不少事儿，一五一十地按照jml的实现应该是不会出错的，只不过可能时间复杂度上不太友好</li><li>不过一些复杂的项目，使用jml描述可能会把本就复杂的问题更加复杂化，带来理解上的困难，虽然现在已经有一些方法的jml描述我不想看，直接让AI分析了，所以，Jml也有其不足之处</li><li>善用AI，辅助自己<strong>高效地学习与完成作业</strong>，比如：可以将看不懂或者很复杂的jml描述让AI分析解释；可以自己的代码给AI让其提出可以优化时间复杂度的方法；可以用AI学习一些知识：并查集、双向BFS等，用好之后，能大大提升自己的效率。</li><li>但也不能完全依赖AI，缺乏自己的思考与设计，直接不加思考地拷贝粘贴，那样只会<strong>适得其反，学无所获</strong></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>OO</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>OO</tag>
+      
+      <tag>Java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>BUAA-OO-Unit2</title>
     <link href="/2025/04/18/OO-Unit2/"/>
     <url>/2025/04/18/OO-Unit2/</url>
@@ -354,9 +381,9 @@
       
       <tag>CO</tag>
       
-      <tag>CPU</tag>
-      
       <tag>Logisim</tag>
+      
+      <tag>CPU</tag>
       
     </tags>
     
@@ -414,9 +441,9 @@
       
       <tag>CO</tag>
       
-      <tag>CPU</tag>
-      
       <tag>Logisim</tag>
+      
+      <tag>CPU</tag>
       
     </tags>
     
