@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://pzhwuhu.github.io/2025/07/20/SQL/</loc>
-    <lastmod>2025-07-30</lastmod>
+    <loc>http://pzhwuhu.github.io/2025/07/30/TUH%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD/</loc>
+    <lastmod>2025-08-02</lastmod>
   </url>
   <url>
-    <loc>http://pzhwuhu.github.io/2025/07/30/TUH%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD/</loc>
+    <loc>http://pzhwuhu.github.io/2025/08/03/Pytorch%20Tutorial-Tensors/</loc>
+    <lastmod>2025-08-02</lastmod>
+  </url>
+  <url>
+    <loc>http://pzhwuhu.github.io/2025/07/20/SQL/</loc>
     <lastmod>2025-07-30</lastmod>
   </url>
   <url>
