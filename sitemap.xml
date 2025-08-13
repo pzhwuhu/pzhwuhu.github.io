@@ -432,13 +432,6 @@
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/tags/mips/</loc>
-    <lastmod>2025-08-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://pzhwuhu.github.io/tags/Logisim/</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -453,21 +446,7 @@
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/tags/SQL/</loc>
-    <lastmod>2025-08-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://pzhwuhu.github.io/tags/MySQL/</loc>
-    <lastmod>2025-08-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://pzhwuhu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>http://pzhwuhu.github.io/tags/mips/</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -489,6 +468,27 @@
   
   <url>
     <loc>http://pzhwuhu.github.io/tags/EEG/</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://pzhwuhu.github.io/tags/SQL/</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://pzhwuhu.github.io/tags/MySQL/</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://pzhwuhu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -581,14 +581,14 @@
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/categories/CS-186/</loc>
+    <loc>http://pzhwuhu.github.io/categories/%E5%97%91%E7%9B%90/</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://pzhwuhu.github.io/categories/%E5%97%91%E7%9B%90/</loc>
+    <loc>http://pzhwuhu.github.io/categories/CS-186/</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
