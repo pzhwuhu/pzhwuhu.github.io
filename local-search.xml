@@ -4,6 +4,97 @@
   
   
   <entry>
+    <title>李宏毅机器学习-CNN</title>
+    <link href="/2025/08/19/CNN/"/>
+    <url>/2025/08/19/CNN/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-info">            <p>这是我学习李宏毅机器学习时记录的一些笔记 ，希望能对你有所帮助😊 </p>          </div><h1 id="1-什么是卷积神经网络-CNN-？"><a href="#1-什么是卷积神经网络-CNN-？" class="headerlink" title="1. 什么是卷积神经网络 (CNN)？"></a>1. 什么是卷积神经网络 (CNN)？</h1><p>卷积神经网络（Convolutional Neural Network, CNN）是一种专为处理图像数据而设计的网络架构 它在<strong>图像分类</strong>等领域表现出色，能够将输入的图像识别为不同的类别（例如，猫、狗、树等） </p><p>其基本工作流程是将一张图像作为输入，通过模型处理后，输出一个<strong>概率分布向量</strong>，表示该图像属于各个类别的可能性 。模型通过比较预测输出与真实标签的差异（例如使用<code>cross-entropy</code>交叉熵损失函数）来进行学习和优化 。</p><h1 id="2-CNN的核心思想"><a href="#2-CNN的核心思想" class="headerlink" title="2. CNN的核心思想"></a>2. CNN的核心思想</h1><p><strong>传统的全连接神经网络直接处理图像时，会产生巨大的参数量，导致计算效率低下且难以训练</strong> 。CNN通过三个关键观察简化了模型，使其更适用于图像处理：</p><ul><li><p><strong>观察1：局部模式的重要性</strong></p><ul><li>图像中的关键特征（如鸟的眼睛或喙）通常比整个图像小得多。因此，神经元无需观察整个图像，<strong>只需关注一个小的局部区域</strong>，这个区域被称为“感受野”（<code>Receptive Field</code>)。这大大减少了神经元之间的连接数量。</li></ul></li><li><p><strong>观察2：模式的重复出现</strong></p><ul><li>同一个特征（如鸟喙）可能出现在图像的不同位置 。CNN利用这一特性，让不同的神经元<strong>共享同一组权重参数</strong>来检测相同的模式，这一机制称为“参数共享”（<code>Parameter Sharing</code>）。</li></ul></li><li><p><strong>观察3：下采样的不变性</strong></p><ul><li>对图像进行<strong>下采样</strong>（即降低分辨率）通常不会改变图像中的物体类别。</li></ul></li></ul><h1 id="3-CNN的关键组成部分"><a href="#3-CNN的关键组成部分" class="headerlink" title="3. CNN的关键组成部分"></a>3. CNN的关键组成部分</h1><p>一个典型的CNN模型由以下几个主要部分组成：</p><h2 id="输入层-Input-Layer"><a href="#输入层-Input-Layer" class="headerlink" title="输入层 (Input Layer)"></a>输入层 (Input Layer)</h2><ul><li>输入的图像被表示为一个三维张量（tensor），其维度为<br>  <code>高度 x 宽度 x 通道数</code>。</li><li>对于彩色图像，通常有3个通道（红、绿、蓝）。对于黑白图像，则只有1个通道。</li><li>所有用于分类的输入图像尺寸必须相同。</li></ul><h2 id="卷积层-Convolutional-Layer"><a href="#卷积层-Convolutional-Layer" class="headerlink" title="卷积层 (Convolutional Layer)"></a>卷积层 (Convolutional Layer)</h2><p>卷积层是CNN的核心，它基于“感受野”和“参数共享”的思想构建。其工作方式有两种等效的理解：</p><ol><li><p><strong>神经元视角</strong>：</p><ul><li>每个神经元只连接到输入图像的一个局部区域（<code>Receptive Field</code>）。</li><li>位于不同<code>Receptive Field</code>但用于检测相同特征的神经元共享同一套权重和偏置（bias）参数。</li></ul></li><li><p>**滤波器视角 (Filter Version)**：</p><ul><li>卷积层包含一组<strong>滤波器</strong>（也称作“核”，kernel），每个滤波器负责检测<strong>一种特定的局部模式</strong>（如边缘、纹理等）。</li><li>每个滤波器在整个输入图像上滑动（卷积），计算每个位置的局部特征，并生成一个对应的<br>  <strong>特征图</strong>（Feature Map）。</li><li>卷积层通常包含多个滤波器（例如64个），从而生成一个包含多个通道（每个通道对应一个特征图）的新“图像” 。</li></ul></li></ol><ul><li><strong>关键参数</strong>：<ul><li><strong>核尺寸 (Kernel Size)</strong>: 滤波器的大小，例如 3x3。</li><li><strong>步幅 (Stride)</strong>: 滤波器每次滑动的距离，例如步幅为2意味着每次移动2个像素。</li><li><strong>填充 (Padding)</strong>: 在图像边界添加额外的像素，以保持输出尺寸或处理边界信息。</li></ul></li></ul><h2 id="池化层-Pooling-Layer"><a href="#池化层-Pooling-Layer" class="headerlink" title="池化层 (Pooling Layer)"></a>池化层 (Pooling Layer)</h2><ul><li><p>池化层基于“下采样”的思想，用于减小特征图的尺寸。</p></li><li><p><strong>最大池化 (Max Pooling)</strong> 是最常用的一种方式，它将特征图的一个区域（例如2x2）压缩成一个单一像素，该像素的值为该区域内的最大值。</p></li><li><p><strong>作用</strong>：</p><ul><li>减少计算量和参数数量。</li><li>增强模型的平移不变性，即物体在图像中的小幅移动不影响最终结果</li><li>如果算力充足，也不需要池化</li></ul></li></ul><h2 id="扁平化与全连接层-Flatten-Fully-Connected-Layers"><a href="#扁平化与全连接层-Flatten-Fully-Connected-Layers" class="headerlink" title="扁平化与全连接层 (Flatten &amp; Fully Connected Layers)"></a>扁平化与全连接层 (Flatten &amp; Fully Connected Layers)</h2><ul><li><p>在经过一系列卷积和池化层处理后，得到最终的<code>feature map</code>特征图 。</p></li><li><p>**扁平化 (Flatten)**：将多维的特征图转换成一个一维向量。</p></li><li><p>**全连接层 (Fully Connected Layers)**：将扁平化后的向量送入一个或多个标准的全连接神经网络层。</p></li><li><p><strong>输出层</strong>：最后通过一个输出层（通常使用<code>Softmax</code>激活函数）得到最终的分类概率。</p></li></ul><h1 id="4-CNN的典型架构"><a href="#4-CNN的典型架构" class="headerlink" title="4. CNN的典型架构"></a>4. CNN的典型架构</h1><p>一个完整的CNN通常由以下部分串联而成：</p><p><strong>输入图像 → [卷积层 → 池化层] (重复多次) → 扁平化 → 全连接层 → 输出 (分类结果)</strong> </p><h1 id="5-CNN的应用"><a href="#5-CNN的应用" class="headerlink" title="5. CNN的应用"></a>5. CNN的应用</h1><p>CNN不仅限于图像识别，其核心思想还可应用于其他领域：</p><ul><li><p><strong>围棋 (Go)</strong>: 棋盘可以被看作一个19x19的图像，CNN能够识别棋盘上的局部模式来决策下一步。值得注意的是，AlphaGo并未使用池化层。</p></li><li><p><strong>语音识别 (Speech)</strong>: 语音的频谱图可以作为图像输入，供CNN进行分析。</p></li><li><p><strong>自然语言处理 (NLP)</strong>: 句子可以被转换为词向量矩阵，CNN可以从中提取关键短语等模式。</p></li></ul><h1 id="6-局限性"><a href="#6-局限性" class="headerlink" title="6. 局限性"></a>6. 局限性</h1><ul><li><p>标准的CNN对图像的<br>  <strong>缩放和旋转</strong>并不具有不变性。为了解决这个问题，通常需要进行数据增强（Data Augmentation）。</p></li><li><p>更高级的技术如空间变换网络（Spatial Transformer Layer）也可以用来处理这类几何变换。</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>ML</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ML</tag>
+      
+      <tag>CNN</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>李宏毅机器学习-HW1 Notebook</title>
+    <link href="/2025/08/16/HW1%20Notebook/"/>
+    <url>/2025/08/16/HW1%20Notebook/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-info">            <p>这是我完成李宏毅机器学习2021作业1时记录的一些笔记 ，希望能对你有所帮助😊 </p>          </div><p>作业1是**HW1-COVID-19 Cases Prediction（Regression)**，是一个回归任务,<a href="https://www.kaggle.com/competitions/ml2021spring-hw1/overview">kaggle链接</a><br>下面是 <code>strong baseline</code> 的要求：</p><h1 id="Strong-Baseline"><a href="#Strong-Baseline" class="headerlink" title="Strong Baseline"></a>Strong Baseline</h1><ul><li>Feature selection (what other features are useful?)</li><li>DNN architecture (layers? dimension? activation function?)</li><li>Training (mini-batch? optimizer? learning rate?)</li><li>L2 regularization</li><li>There are some mistakes in the sample code, can you find them?</li></ul><hr><h1 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h1><p>源数据有94列，肯定不能一股脑地全拿来训练，我们需要进行特征选择。我是用的比较传统的<strong>计算相关性</strong>的方法，然后排序，取前k个，大致代码如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Feature Selection</span><br><br>df = pd.read_csv(tr_path)<br>target_column = <span class="hljs-number">94</span><br>top_key  = <span class="hljs-number">14</span><br><br>y = df.iloc[:,target_column]<br>X = df.drop(columns=df.columns[target_column])<br><br><span class="hljs-built_in">print</span>(y)<br>correlations = X.corrwith(y).<span class="hljs-built_in">abs</span>().sort_values(ascending=<span class="hljs-literal">False</span>).head(top_key)<br><span class="hljs-built_in">print</span>(correlations)<br>selected_features = [df.columns.get_loc(i) - <span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> correlations.index]<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Selected features:\n&quot;</span>, selected_features)<br></code></pre></td></tr></table></figure><p>这样做有一个好处就是你能自己<strong>清楚地把握每一个特征的相关性</strong>，然后根据需要选择大于某一阈值的，而不仅仅是机械式的前多少多少个</p><hr><h1 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h1><p>当然，<code>sklearn</code>库早已封装好了相关函数，一起来学习下</p><p><code>Scikit-learn (sklearn)</code> 提供了多种特征选择（Feature Selection）方法，用于从原始数据中筛选出最有价值的特征，以提高模型性能、降低过拟合并减少计算开销。以下是 sklearn 中常用的特征选择方法分类及具体实现：</p><h2 id="1-移除低方差特征（VarianceThreshold）"><a href="#1-移除低方差特征（VarianceThreshold）" class="headerlink" title="1. 移除低方差特征（VarianceThreshold）"></a>1. 移除低方差特征（VarianceThreshold）</h2><ul><li><strong>原理</strong>：移除方差低于阈值的特征（方差接近零的特征通常对模型无贡献）。</li><li><strong>适用场景</strong>：<strong>适用于删除几乎恒定的特征</strong>（如所有样本取值相同）。</li><li><strong>示例</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_selection <span class="hljs-keyword">import</span> VarianceThreshold<br>selector = VarianceThreshold(threshold=<span class="hljs-number">0.1</span>)  <span class="hljs-comment"># 移除方差 &lt;0.1 的特征</span><br>X_new = selector.fit_transform(X)<br></code></pre></td></tr></table></figure></li></ul><h2 id="2-单变量特征选择（Univariate-Selection）"><a href="#2-单变量特征选择（Univariate-Selection）" class="headerlink" title="2. 单变量特征选择（Univariate Selection）"></a>2. 单变量特征选择（Univariate Selection）</h2><p>基于统计检验或模型对每个特征单独评估，选择最佳特征。</p><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ul><li><strong>SelectKBest</strong>：选择得分最高的前 <code>k</code> 个特征。</li><li><strong>SelectPercentile</strong>：选择得分最高的前 <code>percentile%</code> 特征。</li><li><strong>常用统计检验</strong>：<ul><li>分类问题：<code>chi2</code>（卡方检验）、<code>f_classif</code>（ANOVA F值）、<code>mutual_info_classif</code>（互信息）。</li><li>回归问题：<code>f_regression</code>（F检验）、<code>mutual_info_regression</code>（互信息）。</li></ul></li></ul><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_selection <span class="hljs-keyword">import</span> SelectKBest, chi2<br>selector = SelectKBest(chi2, k=<span class="hljs-number">10</span>)  <span class="hljs-comment"># 选择卡方检验得分最高的10个特征</span><br>X_new = selector.fit_transform(X, y)<br></code></pre></td></tr></table></figure><h2 id="3-递归特征消除（RFE-Recursive-Feature-Elimination）"><a href="#3-递归特征消除（RFE-Recursive-Feature-Elimination）" class="headerlink" title="3. 递归特征消除（RFE, Recursive Feature Elimination）"></a>3. 递归特征消除（RFE, Recursive Feature Elimination）</h2><ul><li><strong>原理</strong>：通过递归地训练模型（如线性回归、SVM）并移除权重最低的特征，逐步筛选特征。</li><li><strong>特点</strong>：需要指定最终特征数量或通过交叉验证自动选择（<code>RFECV</code>）。</li><li><strong>示例</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_selection <span class="hljs-keyword">import</span> RFE<br><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegression<br>model = LogisticRegression()<br>selector = RFE(model, n_features_to_select=<span class="hljs-number">5</span>)  <span class="hljs-comment"># 选择5个特征</span><br>X_new = selector.fit_transform(X, y)<br></code></pre></td></tr></table></figure></li></ul><h2 id="4-基于模型权重的特征选择"><a href="#4-基于模型权重的特征选择" class="headerlink" title="4. 基于模型权重的特征选择"></a>4. 基于模型权重的特征选择</h2><ul><li><strong>原理</strong>：使用具有特征重要性或系数权重的模型（如线性模型、树模型）筛选特征。</li><li><strong>方法</strong>：<ul><li><code>SelectFromModel</code>：根据模型权重或重要性阈值选择特征。</li><li>适用于：<code>Lasso</code>（回归）、<code>RandomForest</code>、<code>XGBoost</code> 等。</li></ul></li></ul><h3 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_selection <span class="hljs-keyword">import</span> SelectFromModel<br><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> RandomForestClassifier<br>model = RandomForestClassifier()<br>selector = SelectFromModel(model, threshold=<span class="hljs-string">&#x27;median&#x27;</span>)  <span class="hljs-comment"># 选择重要性高于中位数的特征</span><br>X_new = selector.fit_transform(X, y)<br></code></pre></td></tr></table></figure><h2 id="完整流程建议"><a href="#完整流程建议" class="headerlink" title="完整流程建议"></a>完整流程建议</h2><ol><li>预处理：先处理缺失值、标准化数据。</li><li>初步筛选：用 <code>VarianceThreshold</code> 或单变量方法减少特征数量。</li><li>精细筛选：结合模型（如 <code>SelectFromModel</code> 或 <code>RFE</code>）和交叉验证。</li><li>验证：比较筛选前后模型的性能（如 AUC、RMSE）。</li></ol><p>通过合理组合这些方法，可以高效地优化特征空间，提升模型效果。</p><hr><h1 id="L1-L2-正则化"><a href="#L1-L2-正则化" class="headerlink" title="L1&#x2F;L2 正则化"></a>L1&#x2F;L2 正则化</h1><p>L1&#x2F;L2 正则化是机器学习中用于<strong>防止模型过拟合</strong>的核心技术，通过<strong>向损失函数添加惩罚项</strong>来约束模型参数。以下是关键点总结：</p><h2 id="1-L1-正则化（Lasso）"><a href="#1-L1-正则化（Lasso）" class="headerlink" title="1. L1 正则化（Lasso）"></a>1. L1 正则化（Lasso）</h2><ul><li><strong>公式</strong>：损失函数 + $λ∑|wᵢ|$<br>λ控制惩罚强度，wᵢ为模型参数。</li><li><strong>特点</strong>：<ul><li><strong>稀疏性</strong>：<strong>倾向于将部分参数压缩为0，适用于特征选择</strong>。</li><li><strong>鲁棒性</strong>：对异常值不敏感。</li><li><strong>不可导性</strong>：需用次梯度优化（如坐标下降）。</li></ul></li><li><strong>场景</strong>：高维数据、特征冗余时（如基因数据、文本分类）。</li></ul><h2 id="2-L2-正则化（Ridge）"><a href="#2-L2-正则化（Ridge）" class="headerlink" title="2. L2 正则化（Ridge）"></a>2. L2 正则化（Ridge）</h2><ul><li><strong>公式</strong>：损失函数 + $λ∑wᵢ²$</li><li><strong>特点</strong>：<ul><li><strong>平滑收缩</strong>：均匀减小参数值，避免<strong>极端权重</strong>。</li><li><strong>可导性</strong>：可用梯度下降优化。</li><li><strong>抗共线性</strong>：缓解特征相关性带来的不稳定。</li></ul></li><li><strong>场景</strong>：参数间相关性高（如线性回归、神经网络）， <strong>约束参数值，避免模型对训练数据过度敏感，过度依赖某些特征</strong>。</li></ul><h2 id="3-对比"><a href="#3-对比" class="headerlink" title="3. 对比"></a>3. 对比</h2><table><thead><tr><th><strong>特性</strong></th><th><strong>L1</strong></th><th><strong>L2</strong></th></tr></thead><tbody><tr><td><strong>稀疏性</strong></td><td>是（自动特征选择）</td><td>否</td></tr><tr><td><strong>解的唯一性</strong></td><td>可能多解（非严格凸）</td><td>唯一解（严格凸）</td></tr><tr><td><strong>优化方法</strong></td><td>坐标下降、近端梯度</td><td>梯度下降、解析解</td></tr><tr><td><strong>抗噪声</strong></td><td>强</td><td>中等</td></tr></tbody></table><h2 id="4-结合使用（Elastic-Net）"><a href="#4-结合使用（Elastic-Net）" class="headerlink" title="4. 结合使用（Elastic Net）"></a>4. 结合使用（Elastic Net）</h2><ul><li><strong>公式</strong>：损失函数 + $λ₁∑|wᵢ| + λ₂∑wᵢ²$<br>平衡L1的稀疏性和L2的稳定性，适用于特征维度极高且相关性强的情况。</li></ul><h2 id="5-数学直观"><a href="#5-数学直观" class="headerlink" title="5.数学直观"></a>5.数学直观</h2><ul><li><strong>L1</strong>：菱形约束域，最优解常出现在顶点（某些参数为0）。</li><li><strong>L2</strong>：圆形约束域，最优解在边界某点（所有参数非零但小）。</li></ul><h2 id="6-代码"><a href="#6-代码" class="headerlink" title="6.代码"></a>6.代码</h2><ul><li>L2正则化可以<strong>在损失函数中手动添加</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_epochs):<br>optimizer.zero_grad()<br>y_pred = model(X_tensor)<br>loss = nn.MSELoss()(y_pred, y_target)<br>l2_reg = torch.<span class="hljs-built_in">sum</span>(model.weight ** <span class="hljs-number">2</span>) <span class="hljs-comment"># L2惩罚项（不包含偏置）</span><br>total_loss = loss +  lambda_l2 * l2_reg <span class="hljs-comment"># 总损失</span><br>total_loss.backward()<br>optimizer.step()<br></code></pre></td></tr></table></figure></li><li>也可以直接在优化器中加 <code>weight_decay</code> 实现，比如：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">optimizer = torch.optim.Adam(model.parameters(), lr=<span class="hljs-number">1e-3</span>, weight_decay=<span class="hljs-number">1e-4</span>)<br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>ML</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Pytorch</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>ML</tag>
+      
+      <tag>feature_selection</tag>
+      
+      <tag>L2_regularization</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>李宏毅机器学习-类神经网络训练</title>
+    <link href="/2025/08/16/%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E6%B3%A8%E6%84%8F/"/>
+    <url>/2025/08/16/%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E6%B3%A8%E6%84%8F/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-info">            <p>这是我学习机器学习时记录的一些笔记 ，希望能对你有所帮助😊 </p>          </div><h1 id="Some-Terms"><a href="#Some-Terms" class="headerlink" title="Some Terms"></a>Some Terms</h1><h2 id="Critical-Point"><a href="#Critical-Point" class="headerlink" title="Critical Point"></a>Critical Point</h2><p>在深度学习中，“critical point”（关键点&#x2F;临界点）指的是损失函数曲面（loss landscape）上梯度为零的点。数学上，这意味着损失函数<code>L</code>（通常是关于模型参数<code>θ</code>的函数）的梯度（或一阶导数）<code>∇L(θ)</code>等于零向量：<strong>∇L(θ) &#x3D; 0</strong></p><p>然而，并非所有的关键点都是我们想要的全局最小值（Global Minimum）。关键点可以分为几类：</p><ol><li><p><strong>局部极小值点（Local Minima）：</strong></p><ul><li>在该点的某个<strong>局部邻域</strong>内，损失函数的值是所有点中最小的（但可能比全局最小值要大）。</li><li>这是优化过程中比较理想的点，虽然不是全局最优，但可能是足够好的解。</li><li><strong>特点：</strong> 在局部最低点，类似于山谷底部。</li></ul></li><li><p><strong>局部极大值点（Local Maxima）：</strong></p><ul><li>在该点的某个<strong>局部邻域</strong>内，损失函数的值是所有点中最大的。</li><li>在最小化损失函数的问题中（几乎所有深度学习任务都是），极大值点是我们想要<strong>避开</strong>的点。</li><li><strong>特点：</strong> 在局部最高点，类似于山顶（但损失高，性能差）。</li><li><strong>在深度学习中的现实性：</strong> 由于神经网络通常具有非常高的维度（参数众多），且损失函数通常无界向上，<strong>局部极大值点在深度学习的高维空间中极其罕见</strong>。更常见的是“反”方向的——鞍点。</li></ul></li><li><p><strong>鞍点（Saddle Points）：</strong></p><ul><li>这是深度学习中最普遍、也最具挑战性的关键点类型。</li><li>该点不是局部极小值点也不是局部极大值点。</li><li>在通过该点的<strong>某些方向</strong>上，损失函数<strong>上升</strong>；在<strong>另一些方向</strong>上，损失函数<strong>下降</strong>。</li><li><strong>特点：</strong> 形状类似于马鞍——在某些方向是“谷底”，在某些方向是“山顶”。</li><li><strong>在高维空间中的普遍性：</strong> 随着模型参数维度的增加（这正是深度神经网络的特点），损失函数曲面的鞍点数量会<strong>指数级地多于局部极小值点</strong>。研究表明，在深度学习中，<strong>阻碍训练收敛的主要障碍物更可能是鞍点而不是局部极小值</strong>。</li><li><strong>影响：</strong> 在鞍点处，梯度为零，标准的优化算法可能会停滞不前。如果下降方向“被困”在鞍点的平坦区域或上升方向，损失很长时间不会下降，学习变得非常缓慢，类似于“高原现象”。但在正确的方向上，损失是可以继续下降的。</li></ul></li></ol><p><strong>如何应对关键点（尤其是鞍点）？</strong></p><ul><li><strong>使用带动量（Momentum）的优化器：</strong> 如SGD with Momentum, Adam, RMSProp等。动量可以帮助参数更新“冲过”鞍点中平坦或轻微上升的区域，因为它积累了之前梯度的方向。</li><li><strong>自适应学习率：</strong> 像Adam这样的优化器会调整每个参数的学习率，有助于更快地逃离鞍点沿着下降方向前进。</li><li><strong>批归一化（Batch Normalization）等技巧：</strong> 通过平滑损失函数曲面，可能有助于减少鞍点带来的影响。</li><li><strong>合适的初始化：</strong> 好的参数初始化策略（如Xavier, He Init）可以让网络从更容易优化的位置开始。</li><li><strong>随机性：</strong> SGD本身固有的随机性（基于小批量样本计算梯度）有助于逃离某些鞍点。</li></ul><h2 id="Batch-Size"><a href="#Batch-Size" class="headerlink" title="Batch Size"></a>Batch Size</h2><ul><li>Smaller batch requires longer time for one epoch</li><li>Smaller batch size has better performance</li></ul><p><img src="https://cdn.jsdelivr.net/gh/pzhwuhu/Image-Hosting/Posts%20insert/20250814214719943.png"><br><img src="https://cdn.jsdelivr.net/gh/pzhwuhu/Image-Hosting/Posts%20insert/20250814214645424.png"></p><h1 id="Better-Optimization"><a href="#Better-Optimization" class="headerlink" title="Better Optimization"></a>Better Optimization</h1><h2 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h2><p>Momentum introduces a weighted sum of previous gradients to accelerate gradient descent. The movement is defined as the movement of the last step minus the gradient at the present step. The process is as follows:</p><p>$$<br>\begin{align}<br>m^0 &amp;&#x3D; 0 \<br>m^1 &amp;&#x3D; -\eta g^0 \<br>m^2 &amp;&#x3D; \lambda m^1 - \eta g^1 \<br>&amp;\vdots \<br>\theta^{t+1} &amp;&#x3D; \theta^t + m^t<br>\end{align}<br>$$</p><p>where:<br>    $m^t$ is the movement at step,<br>    $\lambda$ is the momentum coefficient (0 &lt; $\lambda$ &lt; 1),<br>    $\eta$ is the learning rate,<br>    $g^t$ is the gradient at step.</p><p>This method ensures the movement is not just based on the current gradient but also on the <strong>previous movement</strong>, improving convergence.</p><h1 id="Adaptive-Learning-rate"><a href="#Adaptive-Learning-rate" class="headerlink" title="Adaptive Learning rate"></a>Adaptive Learning rate</h1><p><img src="https://cdn.jsdelivr.net/gh/pzhwuhu/Image-Hosting/Posts%20insert/20250814210238642.png"><br>所以我们需要修改Optimization的公式，由公式1替换为公式2，$σ_i^t$ 是一个与时间、特征都有关系的量。<br>$$<br>\begin{align}<br>θ_i^{t+1}←θ_i^t−ηg_i^t \<br>θ_i^{t+1}←θ_i^t−\frac η{σ_i^t}g_i^t \<br>\end{align}<br>$$<br>具体的更新过程可以有几种方式</p><h2 id="RMS"><a href="#RMS" class="headerlink" title="RMS"></a>RMS</h2><p>$$<br>\begin{align}<br>θ_i^1&amp;←θ_i^0−\frac η{σ_i^0}g_i^0 &amp; σ_i^0&amp;&#x3D;\sqrt{(g_i^0)^2} &#x3D; |g_i^0| \<br>θ_i^2&amp;←θ_i^1−\frac η{σ_i^1}g_i^1 &amp; σ_i^1&amp;&#x3D;\sqrt{\frac1 2(g_i^1)^2 + (g_i^0)^2} \<br>θ_i^3&amp;←θ_i^2−\frac η{σ_i^2}g_i^2 &amp; σ_i^2&amp;&#x3D;\sqrt{\frac1 3(g_i^2)^2 + (g_i^1)^2 + (g_i^0)^2} \<br>\vdots &amp;&amp;&amp; \<br>\end{align}<br>$$<br>但是RMS的问题是所有的梯度具有一样的权重，优化过程中，<strong>不同时间步的梯度可能差异极大</strong>（例如某些参数梯度大，某些梯度小），<strong>静态 RMS 无法自适应调整学习率</strong>，也就是无法敏锐捕捉当前梯度的变化趋势，可能造成震荡。因此诞生了RMS Prop</p><h2 id="RMS-Prop"><a href="#RMS-Prop" class="headerlink" title="RMS Prop"></a>RMS Prop</h2><p>自适应调整<br>$$<br>\begin{align}<br>\theta_i^1 &amp;\leftarrow \theta_i^0 - \frac{\eta}{\sigma_i^0} g_i^0 &amp; \sigma_i^0 &amp;&#x3D; \sqrt{(g_i^0)^2} \quad 0 &lt; \alpha &lt; 1 \<br>\theta_i^2 &amp;\leftarrow \theta_i^1 - \frac{\eta}{\sigma_i^1} g_i^1 &amp; \sigma_i^1 &amp;&#x3D; \sqrt{\alpha (\sigma_i^0)^2 + (1 - \alpha) (g_i^1)^2} \<br>\theta_i^3 &amp;\leftarrow \theta_i^2 - \frac{\eta}{\sigma_i^2} g_i^2 &amp; \sigma_i^2 &amp;&#x3D; \sqrt{\alpha (\sigma_i^1)^2 + (1 - \alpha) (g_i^2)^2} \<br>\vdots &amp;&amp;&amp; \<br>\theta_i^{t+1} &amp;\leftarrow \theta_i^t - \frac{\eta}{\sigma_i^t} g_i^t &amp; \sigma_i^t &amp;&#x3D; \sqrt{\alpha (\sigma_i^{t-1})^2 + (1 - \alpha) (g_i^t)^2}<br>\end{align}<br>$$</p><h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><p><strong>Adam: RMSProp + Momentum</strong></p><p>值得一提的是，RMSProp 和 Momentum 都涉及到了历史梯度，是否重复呢？非也<br>因为RMS计算的是一个平凡根，是一个<code>scalar</code><br>而<strong>Momentum则是前一步移动的向量相加，不仅会有大小还会有方向上的影响</strong>。</p><h2 id="Learning-Rate-Scheduling"><a href="#Learning-Rate-Scheduling" class="headerlink" title="Learning Rate Scheduling"></a>Learning Rate Scheduling</h2><p>将参数$\eta$也随时间改变，变化的方式有两种<br>$$<br>\begin{align}<br>\eta&amp;\leftarrow\eta^t \ \theta_i^{t+1} &amp;\leftarrow \theta_i^t - \frac{\eta^t}{\sigma_i^t} g_i^t<br>\end{align}<br>$$</p><h3 id="Decay"><a href="#Decay" class="headerlink" title="Decay"></a>Decay</h3><h3 id="Warm-up"><a href="#Warm-up" class="headerlink" title="Warm up"></a>Warm up</h3><p><img src="https://cdn.jsdelivr.net/gh/pzhwuhu/Image-Hosting/Posts%20insert/20250814214435975.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ML</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>ML</tag>
+      
+      <tag>Adam</tag>
+      
+      <tag>RMS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Pytorch Tutorial-Training Models</title>
     <link href="/2025/08/12/Training%20Models/"/>
     <url>/2025/08/12/Training%20Models/</url>
@@ -25,6 +116,10 @@
       <tag>Python</tag>
       
       <tag>ML</tag>
+      
+      <tag>SGD</tag>
+      
+      <tag>Optimizer</tag>
       
     </tags>
     
@@ -53,7 +148,7 @@
       
       <tag>Python</tag>
       
-      <tag>ML</tag>
+      <tag>SummaryWritter</tag>
       
     </tags>
     
@@ -84,6 +179,12 @@
       
       <tag>ML</tag>
       
+      <tag>CNN</tag>
+      
+      <tag>RNN</tag>
+      
+      <tag>ReLU</tag>
+      
     </tags>
     
   </entry>
@@ -113,6 +214,10 @@
       
       <tag>ML</tag>
       
+      <tag>Autograd</tag>
+      
+      <tag>Tensor</tag>
+      
     </tags>
     
   </entry>
@@ -141,6 +246,8 @@
       <tag>Python</tag>
       
       <tag>ML</tag>
+      
+      <tag>Tensor</tag>
       
     </tags>
     
