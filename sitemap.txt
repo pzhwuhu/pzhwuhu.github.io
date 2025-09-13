@@ -1,6 +1,7 @@
-http://pzhwuhu.github.io/2025/09/02/Drivebench%20%E5%A4%8D%E7%8E%B0/
 http://pzhwuhu.github.io/2025/08/26/Transformer/
 http://pzhwuhu.github.io/2025/08/22/HW3%20Notebook/
+http://pzhwuhu.github.io/2025/09/13/GAN/
+http://pzhwuhu.github.io/2025/09/02/Drivebench%20%E5%A4%8D%E7%8E%B0/
 http://pzhwuhu.github.io/2025/08/16/%E7%B1%BB%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%E6%B3%A8%E6%84%8F/
 http://pzhwuhu.github.io/2025/08/21/Self-Attention/
 http://pzhwuhu.github.io/2025/08/16/HW1%20Notebook/
@@ -91,6 +92,9 @@ http://pzhwuhu.github.io/tags/Self-Attention/
 http://pzhwuhu.github.io/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B/
 http://pzhwuhu.github.io/tags/Transformer/
 http://pzhwuhu.github.io/tags/Seq2seq/
+http://pzhwuhu.github.io/tags/GAN/
+http://pzhwuhu.github.io/tags/Adversarial/
+http://pzhwuhu.github.io/tags/JS%E6%95%A3%E5%BA%A6/
 http://pzhwuhu.github.io/categories/OO/
 http://pzhwuhu.github.io/categories/Pytorch/
 http://pzhwuhu.github.io/categories/%E6%97%A5%E5%B8%B8/
