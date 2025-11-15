@@ -1,7 +1,9 @@
+http://pzhwuhu.github.io/2025/11/15/Diifusion-Conditional/
+http://pzhwuhu.github.io/2025/11/13/Diffusion-%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/
+http://pzhwuhu.github.io/2025/10/16/%E6%A6%82%E7%8E%87/
 http://pzhwuhu.github.io/2024/11/11/P4%E8%AF%BE%E4%B8%8B/
 http://pzhwuhu.github.io/2025/09/02/Drivebench%20%E5%A4%8D%E7%8E%B0/
 http://pzhwuhu.github.io/2025/10/16/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/
-http://pzhwuhu.github.io/2025/10/16/%E6%A6%82%E7%8E%87/
 http://pzhwuhu.github.io/2025/09/15/Matplotlib%20%E7%94%BB%E5%9B%BE/
 http://pzhwuhu.github.io/2025/09/12/L2-Image%20Classification%20with%20Linear%20Classifiers/
 http://pzhwuhu.github.io/2025/09/13/GAN/
@@ -114,6 +116,8 @@ http://pzhwuhu.github.io/tags/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/
 http://pzhwuhu.github.io/tags/KL%E6%95%A3%E5%BA%A6/
 http://pzhwuhu.github.io/tags/Adam/
 http://pzhwuhu.github.io/tags/RMS/
+http://pzhwuhu.github.io/tags/Diffusion/
+http://pzhwuhu.github.io/tags/Generative/
 http://pzhwuhu.github.io/categories/OO/
 http://pzhwuhu.github.io/categories/Pytorch/
 http://pzhwuhu.github.io/categories/%E5%97%91%E7%9B%90/
